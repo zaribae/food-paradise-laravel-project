@@ -50,9 +50,9 @@
 
 @section('content')
     <!--=============================
-                                                    BREADCRUMB START
-                                                ==============================-->
-    <section class="fp__breadcrumb" style="background: url(images/counter_bg.jpg);">
+                                                                        BREADCRUMB START
+                                                                    ==============================-->
+    <section class="fp__breadcrumb" style="background: url({{ asset('frontend/images/counter_bg.jpg') }});">
         <div class="fp__breadcrumb_overlay">
             <div class="container">
                 <div class="fp__breadcrumb_text">
@@ -66,14 +66,14 @@
         </div>
     </section>
     <!--=============================
-                                                    BREADCRUMB END
-                                                ==============================-->
+                                                                        BREADCRUMB END
+                                                                    ==============================-->
 
 
     <!--=========================
-                                                SIGNIN START
-                                            ==========================-->
-    <section class="fp__signin" style="background: url(images/login_bg.jpg);">
+                                                                    SIGNIN START
+                                                                ==========================-->
+    <section class="fp__signin" style="background: url({{ asset('frontend/images/login_bg.jpg') }});">
         <div class="fp__signin_overlay pt_125 xs_pt_95 pb_100 xs_pb_70">
             <div class="container">
                 <div class="row wow fadeInUp" data-wow-duration="1s">
@@ -112,12 +112,13 @@
                                     </div>
                                     <div class="col-xl-12">
                                         <div class="fp__login_imput">
-                                            <button type="submit" class="common_btn">login</button>
+                                            <button type="submit" class="common_btn">Login</button>
                                         </div>
                                     </div>
                                 </div>
                             </form>
-                            <p class="create_account">Dont’t have an aceount ? <a href="sign_up.html">Create Account</a>
+                            <p class="create_account">Dont’t have an aceount ? <a href="{{ route('register') }}">Create
+                                    Account</a>
                             </p>
                         </div>
                     </div>
@@ -126,6 +127,6 @@
         </div>
     </section>
     <!--=========================
-                                                SIGNIN END
-                                         ==========================-->
+                                                                    SIGNIN END
+                                                             ==========================-->
 @endsection
