@@ -27,4 +27,15 @@ trait FileUploadTrait
 
         return null;
     }
+
+    /**
+     * Remove Image File
+     */
+    function removeImage($path): void
+    {
+        //Delete previous file in database if updating to a new image
+        if (File::exists(public_path($path))) {
+            File::delete(public_path($path));
+        }
+    }
 }
