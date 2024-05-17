@@ -23,6 +23,7 @@ Route::group([], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::patch('/profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
     Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password.update');
+    Route::post('/profile/picture', [ProfileController::class, 'updatePicture'])->name('profile.picture.update');
 })->middleware(['auth', 'verified']);
 
 // Route::middleware('auth')->group(function () {
