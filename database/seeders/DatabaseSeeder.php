@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         $this->call(UserSeeder::class);
+        $this->call(BenefitTitleSeeder::class);
         \App\Models\Slider::factory(3)->create();
-        $this->call(BenefitSeeder::class);
+        \App\Models\Benefit::factory(3)->create();
     }
 }

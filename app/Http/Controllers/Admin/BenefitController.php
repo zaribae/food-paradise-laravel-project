@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\DataTables\BenefitDataTable;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\BenefitCreateRequest;
+use App\Models\Benefit;
 use App\Models\SectionTitle;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Random\Engine\Secure;
 
@@ -23,17 +26,21 @@ class BenefitController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
-        //
+        return view('admin.benefit.components.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(BenefitCreateRequest $request)
     {
-        //
+        Benefit::create($request->validated());
+
+        toastr()->success('Benefit content Created Successfully!');
+
+        return to_route('admin.benefit.index');
     }
 
     /**
@@ -47,17 +54,24 @@ class BenefitController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id): View
     {
-        //
+        $benefit = Benefit::findOrFail($id);
+        return view('admin.benefit.components.edit', compact('benefit'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(BenefitCreateRequest $request, string $id)
     {
-        //
+        $benefit = Benefit::findOrFail($id);
+
+        $benefit->update($request->validated());
+
+        toastr()->success('Benefit content Updated Successfully!');
+
+        return to_route('admin.benefit.index');
     }
 
     public function updateTitle(Request $request)
@@ -93,6 +107,19 @@ class BenefitController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $benefit = Benefit::findOrFail($id);
+            $benefit->delete();
+
+            return response([
+                'status' => 'success',
+                'message' => 'Slider Deleted Successfully!'
+            ]);
+        } catch (\Exception $e) {
+            return response([
+                'status' => 'error',
+                'message' => 'Something went wrong, Please try again!',
+            ]);
+        }
     }
 }

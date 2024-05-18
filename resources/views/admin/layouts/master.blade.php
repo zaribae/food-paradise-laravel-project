@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ asset('admin/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/css/components.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/css/toastr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/assets/css/bootstrap-iconpicker.css') }}">
     <link rel="stylesheet" href="//cdn.datatables.net/2.0.7/css/dataTables.dataTables.min.css">
     <!-- Start GA -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
@@ -63,6 +64,7 @@
     <script src="{{ asset('admin/assets/js/stisla.js') }}"></script>
 
     <script src="{{ asset('admin/assets/js/toastr.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/js/bootstrap-iconpicker.bundle.min.js') }}"></script>
 
     <script src="{{ asset('admin/assets/modules/upload-preview/assets/js/jquery.uploadPreview.min.js') }}"></script>
 

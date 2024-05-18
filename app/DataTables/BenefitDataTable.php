@@ -22,7 +22,22 @@ class BenefitDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'benefit.action')
+            ->addColumn('action', function ($query) {
+                $edit = "<a href='" . route('admin.benefit.edit', $query->id) . "' class='btn btn-success'><i class='fas fa-pencil-alt'></i></a>";
+                $delete = "<a href='" . route('admin.benefit.destroy', $query->id) . "' class='btn btn-danger ml-3 delete-item'><i class='fas fa-trash-alt'></i></a>";
+
+                return $edit . $delete;
+            })
+            ->addColumn('icon', function ($query) {
+                return '<i style="font-size:4rem" class="' . $query->icon . '"></i>';
+            })->addColumn('status', function ($query) {
+                if ($query->status === 1) {
+                    return '<span class="badge rounded-pill text-white bg-primary">Active</span>';
+                } else {
+                    return '<span class="badge rounded-pill text-white bg-danger">Inactive</span>';
+                }
+            })
+            ->rawColumns(['action', 'icon', 'status'])
             ->setRowId('id');
     }
 
@@ -40,20 +55,20 @@ class BenefitDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('benefit-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    //->dom('Bfrtip')
-                    ->orderBy(1)
-                    ->selectStyleSingle()
-                    ->buttons([
-                        Button::make('excel'),
-                        Button::make('csv'),
-                        Button::make('pdf'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    ]);
+            ->setTableId('benefit-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            //->dom('Bfrtip')
+            ->orderBy(0)
+            ->selectStyleSingle()
+            ->buttons([
+                Button::make('excel'),
+                Button::make('csv'),
+                Button::make('pdf'),
+                Button::make('print'),
+                Button::make('reset'),
+                Button::make('reload')
+            ]);
     }
 
     /**
@@ -62,15 +77,15 @@ class BenefitDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
             Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            Column::make('icon'),
+            Column::make('title'),
+            Column::make('status'),
+            Column::computed('action')
+                ->exportable(false)
+                ->printable(false)
+                ->width(150)
+                ->addClass('text-center'),
         ];
     }
 

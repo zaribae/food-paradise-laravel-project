@@ -17,7 +17,10 @@ class BenefitFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'icon' => 'fas fa-shapes',
+            'title' => fake()->sentence(),
+            'short_description' => fake()->sentence(10),
+            'status' => fake()->boolean()
         ];
     }
 }
