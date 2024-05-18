@@ -23,5 +23,6 @@ class DatabaseSeeder extends Seeder
         \App\Models\Slider::factory(3)->create();
         \App\Models\Benefit::factory(3)->create();
         $this->call(ProductCategorySeeder::class);
+        \App\Models\Product::factory(3)->create();
     }
 }

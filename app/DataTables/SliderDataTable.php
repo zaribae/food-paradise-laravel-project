@@ -29,7 +29,7 @@ class SliderDataTable extends DataTable
                 return $edit . $delete;
             })
             ->addColumn('image', function ($query) {
-                return '<img width="200rem" src="' . asset($query->image) . '">';
+                return '<img width="150rem" src="' . asset($query->image) . '">';
             })->addColumn('status', function ($query) {
                 if ($query->status === 1) {
                     return '<span class="badge rounded-pill text-white bg-primary">Active</span>';
