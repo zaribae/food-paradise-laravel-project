@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\BenefitController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SliderController;
 use Illuminate\Support\Facades\Route;
@@ -15,4 +16,7 @@ Route::prefix('/admin')->as('admin.')->group(function () {
 
     //Slider Route
     Route::resource('/slider', SliderController::class);
+
+    //Benefit Route
+    Route::resource('/benefit', BenefitController::class);
 });

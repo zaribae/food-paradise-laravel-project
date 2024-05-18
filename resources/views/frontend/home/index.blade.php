@@ -10,37 +10,36 @@
 
 
     {{-- Item Promo  --}}
-    @include('frontend.home.components.promos-offer')
+    {{-- @include('frontend.home.components.promos-offer') --}}
 
 
     {{-- Cart PopUp  --}}
-    @include('frontend.home.components.cart-popup')
+    {{-- @include('frontend.home.components.cart-popup') --}}
 
 
     {{-- Menu Item  --}}
-    @include('frontend.home.components.menu-item')
+    {{-- @include('frontend.home.components.menu-item') --}}
 
 
     {{-- Menu Picture  --}}
-    @include('frontend.home.components.menu-picture')
+    {{-- @include('frontend.home.components.menu-picture') --}}
 
 
     {{-- Team Members  --}}
-    @include('frontend.home.components.team-members')
+    {{-- @include('frontend.home.components.team-members') --}}
 
 
     {{-- App Download  --}}
-    @include('frontend.home.components.app-download')
+    {{-- @include('frontend.home.components.app-download') --}}
 
 
     {{-- Testimonial --}}
-    @include('frontend.home.components.testimonials')
+    {{-- @include('frontend.home.components.testimonials') --}}
 
 
     {{-- Counter --}}
-    @include('frontend.home.components.counter')
-
+    {{-- @include('frontend.home.components.counter') --}}
 
     {{-- Blog --}}
-    @include('frontend.home.components.blog')
+    {{-- @include('frontend.home.components.blog') --}}
 @endsection

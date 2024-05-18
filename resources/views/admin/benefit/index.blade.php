@@ -3,7 +3,7 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Slider</h1>
+            <h1>Benefit of Choosing Us</h1>
         </div>
         <div class="card card-primary col-lg-9">
             <div class="card-header">
