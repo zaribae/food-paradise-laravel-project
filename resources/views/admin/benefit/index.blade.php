@@ -14,19 +14,26 @@
                             <h4>Benefit of Choosing us Titles..</h4>
                         </div>
                         <div class="accordion-body collapse" id="panel-body-1" data-parent="#accordion" style="">
-                            <div class="form-group">
-                                <label for="top_title">Top Title</label>
-                                <input type="text" class="form-control" name="top_title" id="top_title">
-                            </div>
-                            <div class="form-group">
-                                <label for="main_title">Main Title</label>
-                                <input type="text" class="form-control" name="main_title" id="main_title">
-                            </div>
-                            <div class="form-group">
-                                <label for="sub_title">Sub Title</label>
-                                <input type="text" class="form-control" name="sub_title" id="sub_title">
-                            </div>
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            <form action="{{ route('admin.benefit.title.update') }}" method="post">
+                                @csrf
+                                @method('PATCH')
+                                <div class="form-group">
+                                    <label for="top_title">Top Title</label>
+                                    <input type="text" class="form-control" name="benefit_top_title" id="top_title"
+                                        value="{{ @$titles['benefit_top_title'] }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="main_title">Main Title</label>
+                                    <input type="text" class="form-control" name="benefit_main_title" id="main_title"
+                                        value="{{ @$titles['benefit_main_title'] }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="sub_title">Sub Title</label>
+                                    <input type="text" class="form-control" name="benefit_sub_title" id="sub_title"
+                                        value="{{ @$titles['benefit_sub_title'] }}">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </form>
                         </div>
                     </div>
                 </div>

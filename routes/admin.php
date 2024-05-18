@@ -18,5 +18,6 @@ Route::prefix('/admin')->as('admin.')->group(function () {
     Route::resource('/slider', SliderController::class);
 
     //Benefit Route
+    Route::patch('/benefit-title-update', [BenefitController::class, 'updateTitle'])->name('benefit.title.update');
     Route::resource('/benefit', BenefitController::class);
 });

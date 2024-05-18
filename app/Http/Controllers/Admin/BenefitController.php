@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\DataTables\BenefitDataTable;
 use App\Http\Controllers\Controller;
+use App\Models\SectionTitle;
 use Illuminate\Http\Request;
+use Random\Engine\Secure;
 
 class BenefitController extends Controller
 {
@@ -13,7 +15,9 @@ class BenefitController extends Controller
      */
     public function index(BenefitDataTable $dataTable)
     {
-        return $dataTable->render('admin.benefit.index');
+        $keys = ['benefit_top_title', 'benefit_main_title', 'benefit_sub_title'];
+        $titles = SectionTitle::whereIn('key', $keys)->pluck('value', 'key');
+        return $dataTable->render('admin.benefit.index', compact('titles'));
     }
 
     /**
@@ -54,6 +58,34 @@ class BenefitController extends Controller
     public function update(Request $request, string $id)
     {
         //
+    }
+
+    public function updateTitle(Request $request)
+    {
+        $request->validate([
+            'benefit_top_title' => ['nullable', 'max:100'],
+            'benefit_main_title' => ['nullable', 'max:200'],
+            'benefit_sub_title' => ['nullable', 'max:500']
+        ]);
+
+        SectionTitle::updateOrCreate(
+            ['key' => 'benefit_top_title'],
+            ['value' => $request->benefit_top_title]
+        );
+
+        SectionTitle::updateOrCreate(
+            ['key' => 'benefit_main_title'],
+            ['value' => $request->benefit_main_title]
+        );
+
+        SectionTitle::updateOrCreate(
+            ['key' => 'benefit_sub_title'],
+            ['value' => $request->benefit_sub_title]
+        );
+
+        toastr()->success('Section Titles Updated Successfully!');
+
+        return redirect()->back();
     }
 
     /**
