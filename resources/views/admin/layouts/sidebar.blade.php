@@ -251,15 +251,15 @@
             <li><a class="nav-link" href="{{ route('admin.benefit.index') }}"><i class="far fa-square"></i>
                     <span>Benefit of Choosing Us</span></a></li>
             <li class="dropdown">
-                {{-- <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
-                    <span>Layout</span></a>
+                    <span>Manage Restaurant</span></a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="layout-default.html">Default Layout</a></li>
-                    <li><a class="nav-link" href="layout-transparent.html">Transparent Sidebar</a></li>
-                    <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
+                    <li><a class="nav-link" href="{{ route('admin.product-category.index') }}">Product Categories</a>
+                    </li>
+                    <li><a class="nav-link" href="layout-transparent.html">Empty</a></li>
+                    <li><a class="nav-link" href="layout-top-navigation.html">Empty</a></li>
                 </ul>
-            </li> --}}
+            </li>
 
         </ul>
     </aside>

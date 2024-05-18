@@ -22,5 +22,6 @@ class DatabaseSeeder extends Seeder
         $this->call(BenefitTitleSeeder::class);
         \App\Models\Slider::factory(3)->create();
         \App\Models\Benefit::factory(3)->create();
+        $this->call(ProductCategorySeeder::class);
     }
 }
