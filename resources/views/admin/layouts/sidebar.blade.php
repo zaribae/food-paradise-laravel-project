@@ -254,10 +254,10 @@
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
                     <span>Manage Restaurant</span></a>
                 <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="{{ route('admin.product.index') }}">Products</a></li>
                     <li><a class="nav-link" href="{{ route('admin.product-category.index') }}">Product Categories</a>
                     </li>
-                    <li><a class="nav-link" href="{{ route('admin.product.index') }}">Products</a></li>
-                    <li><a class="nav-link" href="layout-top-navigation.html">Empty</a></li>
+                    <li><a class="nav-link" href="{{ route('admin.product-gallery.index') }}">Products Gallery</a></li>
                 </ul>
             </li>
 
