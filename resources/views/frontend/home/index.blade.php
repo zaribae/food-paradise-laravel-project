@@ -14,11 +14,11 @@
 
 
     {{-- Cart PopUp  --}}
-    {{-- @include('frontend.home.components.cart-popup') --}}
+    @include('frontend.home.components.cart-popup')
 
 
     {{-- Menu Item  --}}
-    {{-- @include('frontend.home.components.menu-item') --}}
+    @include('frontend.home.components.menu-item')
 
 
     {{-- Menu Picture  --}}

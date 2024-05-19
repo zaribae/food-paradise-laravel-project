@@ -2,28 +2,27 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\DataTables\ProductGalleryDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
-use App\Models\ProductGallery;
-use App\Traits\FileUploadTrait;
+use App\Models\ProductOption;
+use App\Models\ProductSize;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\View\View;
 
-class ProductGalleryController extends Controller
+class ProductSizeController extends Controller
 {
-    use FileUploadTrait;
-
     /**
      * Display a listing of the resource.
      */
     public function index(string $productId): View
     {
         $product = Product::findOrFail($productId);
-        $productImages = ProductGallery::where('product_id', $productId)->get();
-        return view('admin.product.gallery.index', compact('product', 'productImages'));
+        $productSizes = ProductSize::where('product_id', $productId)->get();
+        $productOptions = ProductOption::where('product_id', $productId)->get();
+
+        return view('admin.product.product-size.index', compact('product', 'productSizes', 'productOptions'));
     }
 
     /**
@@ -31,18 +30,24 @@ class ProductGalleryController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
-            'product_images' => ['required', 'image', 'max:2048'],
-            'product_id' => ['required']
-        ]);
+        $request->validate(
+            [
+                'name' => ['required', 'max:50'],
+                'price' => ['required', 'numeric'],
+                'product_id' => ['required'],
+            ],
+            [
+                'name.required' => 'Product size name is Required!',
+                'price.required' => 'Product size price is Required!',
+            ]
+        );
 
-        $imagePath = $this->uploadImage($request, 'product_images');
+        $productSize = new ProductSize();
 
-        $productGallery = new ProductGallery();
-
-        $productGallery->product_id = $request->product_id;
-        $productGallery->product_images = $imagePath;
-        $productGallery->save();
+        $productSize->product_id = $request->product_id;
+        $productSize->name = $request->name;
+        $productSize->price = $request->price;
+        $productSize->save();
 
         toastr()->success('Product Images added Successfully!');
 
@@ -55,9 +60,8 @@ class ProductGalleryController extends Controller
     public function destroy(string $id): Response
     {
         try {
-            $productImages = ProductGallery::findOrFail($id);
-            $this->removeImage($productImages->product_images);
-            $productImages->delete();
+            $productSizes = ProductSize::findOrFail($id);
+            $productSizes->delete();
 
             return response([
                 'status' => 'success',

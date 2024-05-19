@@ -17,8 +17,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Home Route
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+// User Routes
 Route::group([], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::patch('/profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
@@ -26,10 +28,7 @@ Route::group([], function () {
     Route::post('/profile/picture', [ProfileController::class, 'updatePicture'])->name('profile.picture.update');
 })->middleware(['auth', 'verified']);
 
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
+// Product Routes
+Route::get('/product/{slug}', [HomeController::class, 'showProduct'])->name('product.show');
 
 require __DIR__ . '/auth.php';

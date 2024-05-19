@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\BenefitController;
 use App\Http\Controllers\Admin\ProductCategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductGalleryController;
+use App\Http\Controllers\Admin\ProductOptionController;
+use App\Http\Controllers\Admin\ProductSizeController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SliderController;
 use Illuminate\Support\Facades\Route;
@@ -33,4 +35,11 @@ Route::prefix('/admin')->as('admin.')->group(function () {
     // Product Gallery Route
     Route::get('/product-gallery/{productId}', [ProductGalleryController::class, 'index'])->name('product-gallery.show-index');
     Route::resource('/product-gallery', ProductGalleryController::class);
+
+    // Product Size Route
+    Route::get('/product-size/{productId}', [ProductSizeController::class, 'index'])->name('product-size.show-index');
+    Route::resource('/product-size', ProductSizeController::class);
+
+    // Product Option Route
+    Route::resource('/product-option', ProductOptionController::class);
 });

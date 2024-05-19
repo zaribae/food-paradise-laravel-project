@@ -58,7 +58,7 @@ class ProductController extends Controller
         $product->seo_title = $request->seo_title;
         $product->seo_description = $request->seo_description;
         $product->status = $request->status;
-        $product->show_at_home = $request->status;
+        $product->show_at_home = $request->show_at_home;
 
         $product->save();
 
