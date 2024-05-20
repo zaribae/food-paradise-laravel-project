@@ -64,7 +64,7 @@
                                             {{ $size->name }}
                                         </td>
                                         <td style="padding : 2rem">
-                                            {{ $size->price }}
+                                            {{ currencyPosition($size->price) }}
                                         </td>
                                         <td>
                                             <a href=" {{ route('admin.product-size.destroy', $size->id) }}"
@@ -135,7 +135,7 @@
                                             {{ $option->name }}
                                         </td>
                                         <td style="padding : 2rem">
-                                            {{ $option->price }}
+                                            {{ currencyPosition($option->price) }}
                                         </td>
                                         <td>
                                             <a href=" {{ route('admin.product-option.destroy', $option->id) }}"

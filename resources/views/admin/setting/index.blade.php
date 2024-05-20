@@ -41,16 +41,18 @@
                                         @method('PATCH')
                                         <div class="form-group">
                                             <label for="site-name">Site Name</label>
-                                            <input type="text" name="site_name" class="form-control" id="site-name">
+                                            <input type="text" name="site_name" class="form-control"
+                                                value="{{ config('settings.site_name') }}" id="site-name">
                                         </div>
                                         <div class="form-group">
                                             <label for="default-currency">Default Currency</label>
                                             <select name="site_default_currency" id="default-currency"
                                                 class="select2 form-control">
-                                                <option value="idr">Indonesia Rupiah (IDR)</option>
-                                                <option value="usd">America Dollar (USD)</option>
-                                                <option value="eur">Euro (EUR)</option>
-                                                <option value="gbp">Poundsterling (GBP)</option>
+                                                <option value="">Select</option>
+                                                @foreach (config('currency.currency_list') as $currency)
+                                                    <option @selected(config('settings.site_default_currency') === $currency) value="{{ $currency }}">
+                                                        {{ $currency }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="row">
@@ -58,7 +60,8 @@
                                                 <div class="form-group">
                                                     <label for="currency-icon">Currency Icon</label>
                                                     <input name="site_currency_icon" type="text" class="form-control"
-                                                        id="currency-icon">
+                                                        id="currency-icon"
+                                                        value="{{ config('settings.site_currency_icon') }}">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -66,8 +69,8 @@
                                                     <label for="default-currency">Currency Icon Position</label>
                                                     <select name="site_currency_icon_position" id=""
                                                         class="select2 form-control">
-                                                        <option value="right">Right</option>
-                                                        <option value="left">Left</option>
+                                                        <option @selected(config('settings.site_currency_icon_position') === 'right') value="right">Right</option>
+                                                        <option @selected(config('settings.site_currency_icon_position') === 'left') value="left">Left</option>
                                                     </select>
                                                 </div>
                                             </div>
