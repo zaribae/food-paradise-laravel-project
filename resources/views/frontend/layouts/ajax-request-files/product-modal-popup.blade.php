@@ -61,7 +61,7 @@
         @endif
 
         <div class="details_quentity">
-            <h5>select quentity</h5>
+            <h5>select quantity</h5>
             <div class="quentity_btn_area d-flex flex-wrapa align-items-center">
                 <div class="quentity_btn">
                     <button class="btn btn-danger decrement"><i class="fal fa-minus"></i></button>
@@ -78,7 +78,11 @@
         </div>
         <ul class="details_button_area d-flex flex-wrap">
             {{-- <li><a class="common_btn" href="#">add to cart</a></li> --}}
-            <li><button type="submit" class="common_btn view_modal_btn">add to cart</button></li>
+            @if ($product->quantity === 0)
+                <li><button type="button" class="common_btn bg-danger">Out of Stock!</button></li>
+            @else
+                <li><button type="submit" class="common_btn view_modal_btn">add to cart</button></li>
+            @endif
         </ul>
     </div>
 </form>

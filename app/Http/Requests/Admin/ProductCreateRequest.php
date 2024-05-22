@@ -29,6 +29,7 @@ class ProductCreateRequest extends FormRequest
             'long_description' => ['required'],
             'price' => ['required', 'numeric'],
             'offer_price' => ['nullable', 'numeric'],
+            'quantity' => ['required', 'numeric'],
             'sku' => ['nullable', 'max:255'],
             'seo_title' => ['nullable', 'max:255'],
             'seo_description' => ['nullable', 'max:500'],

@@ -8,6 +8,7 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 use PhpParser\Node\Stmt\Return_;
 
@@ -24,8 +25,13 @@ class CartController extends Controller
     // Add product to Cart
     function addToCart(Request $request)
     {
+        $product = Product::with(['productSizes', 'productOptions'])->findOrFail($request->product_id);
+
+        if ($product->quantity < $request->quantity) {
+            throw ValidationException::withMessages(["Product is not available! Only {$product->quantity} Product Left"]);
+        }
+
         try {
-            $product = Product::with(['productSizes', 'productOptions'])->findOrFail($request->product_id);
             $productSizes = $product->productSizes->where('id', $request->product_size)->first();
             $productOptions = $product->productOptions->whereIn('id', $request->product_option);
 
@@ -106,11 +112,22 @@ class CartController extends Controller
 
     function productQuantityUpdate(Request $request): Response
     {
+        $cartProduct = Cart::get($request->rowId);
+        $product = Product::findOrFail($cartProduct->id);
+
+        if ($product->quantity < $request->qty) {
+            return response([
+                'status' => 'error',
+                'message' => "Product is not available! Only {$product->quantity} Product Left",
+                'qty' => $cartProduct->qty
+            ]);
+        }
         try {
-            Cart::update($request->rowId, $request->qty);
+            $cart = Cart::update($request->rowId, $request->qty);
             return response([
                 'product_total_price' => cartProductTotalPrice($request->rowId),
                 'message' => 'Cart updated successfully!',
+                'qty' => $cart->qty < 1 ? 1 : $cart->qty,
             ], 200);
         } catch (\Exception $e) {
             logger($e);

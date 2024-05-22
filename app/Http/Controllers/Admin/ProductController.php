@@ -52,8 +52,9 @@ class ProductController extends Controller
         $product->product_category_id = $request->product_category_id;
         $product->short_description = $request->short_description;
         $product->long_description = $request->long_description;
-        $product->price = (int)$request->price;
-        $product->offer_price = (int)$request->offer_price;
+        $product->price = $request->price;
+        $product->offer_price = $request->offer_price;
+        $product->quantity = $request->quantity;
         $product->sku = $request->sku;
         $product->seo_title = $request->seo_title;
         $product->seo_description = $request->seo_description;
@@ -99,6 +100,10 @@ class ProductController extends Controller
 
         if ($product->name != $request->name) {
             $product->slug = generateUniqueSlug('Product', $request->name);
+        }
+
+        if ($product->quantity) {
+            $product->quantity = $request->quantity;
         }
 
         $product->update($request->validated());

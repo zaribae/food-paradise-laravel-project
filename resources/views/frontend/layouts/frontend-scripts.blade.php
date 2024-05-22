@@ -1,19 +1,4 @@
 <script>
-    toastr.options.closeButton = true;
-    toastr.options.progressBar = true;
-    @if ($errors->any())
-        @foreach ($errors->all() as $error)
-            toastr.error("{{ $error }}");
-        @endforeach
-    @endif
-
-    //Set csrf-token at Ajax Header
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $("meta[name='csrf-token']").attr('content')
-        }
-    });
-
     // Show loading indicator
     function showLoader(params) {
         $('.overlay-container').removeClass('d-none');

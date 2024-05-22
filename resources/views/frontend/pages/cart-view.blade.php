@@ -140,10 +140,16 @@
                 inputField.val(currentValue + 1);
 
                 cartQtyUpdate(rowId, inputField.val(), function(response) {
-                    let productTotalPrice = response.product_total_price;
-                    inputField.closest('tr').find('.product_total_price').text(
-                        "{{ currencyPosition(':productTotalPrice') }}".replace(
-                            ':productTotalPrice', productTotalPrice));
+                    if (response.status === 'success') {
+                        inputField.val(response.qty);
+                        let productTotalPrice = response.product_total_price;
+                        inputField.closest('tr').find('.product_total_price').text(
+                            "{{ currencyPosition(':productTotalPrice') }}".replace(
+                                ':productTotalPrice', productTotalPrice));
+                    } else if (response.status === 'error') {
+                        inputField.val(response.qty);
+                        toastr.error(response.message);
+                    }
                 });
             });
         })
@@ -154,13 +160,22 @@
                 let rowId = inputField.data('id');
                 if (inputField.val() > 1) {
                     inputField.val(currentValue - 1);
+                } else {
                     cartQtyUpdate(rowId, inputField.val(), function(response) {
-                        let productTotalPrice = response.product_total_price;
-                        inputField.closest('tr').find('.product_total_price').text(
-                            "{{ currencyPosition(':productTotalPrice') }}".replace(
-                                ':productTotalPrice', productTotalPrice));
+                        if (response.status === 'success') {
+                            inputField.val(response.qty);
+                            let productTotalPrice = response.product_total_price;
+                            inputField.closest('tr').find('.product_total_price').text(
+                                "{{ currencyPosition(':productTotalPrice') }}".replace(
+                                    ':productTotalPrice', productTotalPrice));
+                        } else if (response.status === 'error') {
+                            inputField.val(response.qty);
+                            toastr.error(response.message);
+                        }
+
                     });
                 }
+
             });
         })
 
