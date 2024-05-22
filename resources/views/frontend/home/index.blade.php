@@ -10,11 +10,7 @@
 
 
     {{-- Item Promo  --}}
-    @include('frontend.home.components.promos-offer')
-
-
-    {{-- Cart PopUp  --}}
-    @include('frontend.home.components.cart-popup')
+    {{-- @include('frontend.home.components.promos-offer') --}}
 
 
     {{-- Menu Item  --}}

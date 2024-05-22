@@ -50,4 +50,12 @@ class HomeController extends Controller
             ->get();
         return view('frontend.pages.product-view', compact('product', 'relatedProduct'));
     }
+
+    function loadProductModal($productId)
+    {
+        $product = Product::with(['productSizes', 'productOptions'])->findOrFail($productId);
+
+        // dd($product);
+        return view('frontend.layouts.ajax-request-files.product-modal-popup', compact('product'))->render();
+    }
 }

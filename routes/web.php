@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\DashboardController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\ProfileController;
@@ -30,5 +31,17 @@ Route::group([], function () {
 
 // Product Routes
 Route::get('/product/{slug}', [HomeController::class, 'showProduct'])->name('product.show');
+
+// Product show Modal Routes
+Route::get('/product-modal/{productId}', [HomeController::class, 'loadProductModal'])->name('product.load-modal');
+
+// Add product to cart Routes
+Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('product.add-to-cart');
+
+// Refresh product cart after adding new product Routes
+Route::get('/get-cart-product', [CartController::class, 'refreshCartProduct'])->name('product.refresh-cart');
+
+// Delete product from cart
+Route::get('/remove-cart-product/{rowId}', [CartController::class, 'deleteProduct'])->name('product.remove-cart');
 
 require __DIR__ . '/auth.php';

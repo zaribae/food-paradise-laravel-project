@@ -2,8 +2,8 @@
 
 @section('content')
     <!--=============================
-                                                                                                                            BREADCRUMB START
-                                                                                                                        ==============================-->
+                                                                                                                                                                                                                                                                                                                            BREADCRUMB START
+                                                                                                                                                                                                                                                                                                                        ==============================-->
     <section class="fp__breadcrumb" style="background: url({{ asset('frontend/images/counter_bg.jpg') }});">
         <div class="fp__breadcrumb_overlay">
             <div class="container">
@@ -18,13 +18,13 @@
         </div>
     </section>
     <!--=============================
-                                                                                                                            BREADCRUMB END
-                                                                                                                        ==============================-->
+                                                                                                                                                                                                                                                                                                                            BREADCRUMB END
+                                                                                                                                                                                                                                                                                                                        ==============================-->
 
 
     <!--=============================
-                                                                                                                            MENU DETAILS START
-                                                                                                                        ==============================-->
+                                                                                                                                                                                                                                                                                                                            MENU DETAILS START
+                                                                                                                                                                                                                                                                                                                        ==============================-->
     <section class="fp__menu_details mt_115 xs_mt_85 mb_95 xs_mb_65">
         <div class="container">
             <div class="row">
@@ -74,49 +74,67 @@
                             {!! $product->short_description !!}
                         </p>
 
-                        @if ($product->productSizes()->exists())
-                            <div class="details_size">
-                                <h5>select size</h5>
-                                @foreach ($product->productSizes as $productSize)
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="name"
-                                            id="size-{{ $productSize->name }}" checked>
-                                        <label class="form-check-label" for="size-{{ $productSize->name }}">
-                                            {{ $productSize->name }}<span>+ ${{ $productSize->price }}</span>
-                                        </label>
-                                    </div>
-                                @endforeach
-                            </div>
-                        @endif
-
-                        @if ($product->productOptions()->exists())
-                            <div class="details_extra_item">
-                                <h5>select option <span>(optional)</span></h5>
-                                @foreach ($product->productOptions as $productOption)
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value=""
-                                            id="option-{{ $productOption->name }}">
-                                        <label class="form-check-label" for="option-{{ $productOption->name }}">
-                                            {{ $productOption->name }} <span>+ ${{ $productOption->price }}</span>
-                                        </label>
-                                    </div>
-                                @endforeach
-                            </div>
-                        @endif
-
-                        <div class="details_quentity">
-                            <h5>select quentity</h5>
-                            <div class="quentity_btn_area d-flex flex-wrapa align-items-center">
-                                <div class="quentity_btn">
-                                    <button class="btn btn-danger"><i class="fal fa-minus"></i></button>
-                                    <input type="text" placeholder="1">
-                                    <button class="btn btn-success"><i class="fal fa-plus"></i></button>
+                        <form action="" method="POST" id="view_add_to_cart_form">
+                            @csrf
+                            <input type="hidden"
+                                value="{{ $product->offer_price > 0 ? $product->offer_price : $product->price }}"
+                                name="base_price" class="view_base_price">
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            @if ($product->productSizes()->exists())
+                                <div class="details_size">
+                                    <h5>select size</h5>
+                                    @foreach ($product->productSizes as $productSize)
+                                        <div class="form-check">
+                                            <input class="form-check-input view-product-size" type="radio"
+                                                name="product_size" value="{{ $productSize->id }}"
+                                                id="size-{{ $productSize->name }}" data-price="{{ $productSize->price }}">
+                                            <label class="form-check-label" for="size-{{ $productSize->name }}">
+                                                {{ $productSize->name }}<span>+
+                                                    {{ currencyPosition($productSize->price) }}</span>
+                                            </label>
+                                        </div>
+                                    @endforeach
                                 </div>
-                                <h3>$320.00</h3>
+                            @endif
+
+                            @if ($product->productOptions()->exists())
+                                <div class="details_extra_item">
+                                    <h5>select option <span>(optional)</span></h5>
+                                    @foreach ($product->productOptions as $productOption)
+                                        <div class="form-check">
+                                            <input class="form-check-input view-product-option" type="checkbox"
+                                                name="product_option[]" value="{{ $productOption->id }}"
+                                                data-price="{{ $productOption->price }}"
+                                                id="option-{{ $productOption->name }}">
+                                            <label class="form-check-label" for="option-{{ $productOption->name }}">
+                                                {{ $productOption->name }} <span>+
+                                                    {{ currencyPosition($productOption->price) }}</span>
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @endif
+
+                            <div class="details_quentity">
+                                <h5>select quentity</h5>
+                                <div class="quentity_btn_area d-flex flex-wrapa align-items-center">
+                                    <div class="quentity_btn">
+                                        <button class="btn btn-danger view-decrement"><i class="fal fa-minus"></i></button>
+                                        <input type="text" class="view-product-quantity" name="quantity" placeholder="1"
+                                            value="1" readonly>
+                                        <button class="btn btn-success view-increment"><i class="fal fa-plus"></i></button>
+                                    </div>
+                                    @if ($product->offer_price > 0)
+                                        <h3 id="view_total_price">{{ currencyPosition($product->offer_price) }}</h3>
+                                    @else
+                                        <h3 id="view_total_price">{{ currencyPosition($product->price) }}</h3>
+                                    @endif
+                                </div>
                             </div>
-                        </div>
+                        </form>
+
                         <ul class="details_button_area d-flex flex-wrap">
-                            <li><a class="common_btn" href="#">add to cart</a></li>
+                            <li><a class="common_btn cart_modal_btn" href="#">add to cart</a></li>
                             <li><a class="wishlist" href="#"><i class="far fa-heart"></i></a></li>
                         </ul>
                     </div>
@@ -126,8 +144,8 @@
                         <ul class="nav nav-pills" id="pills-tab" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
-                                    data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
-                                    aria-selected="true">Description</button>
+                                    data-bs-target="#pills-home" type="button" role="tab"
+                                    aria-controls="pills-home" aria-selected="true">Description</button>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
@@ -290,7 +308,8 @@
                                             @endif
                                         </h5>
                                         <ul class="d-flex flex-wrap justify-content-center">
-                                            <li><a href="#" data-bs-toggle="modal" data-bs-target="#cartModal"><i
+                                            <li><a href="javascript:;"
+                                                    onclick="loadProductModal('{{ $product->id }}')"><i
                                                         class="fas fa-shopping-basket"></i></a></li>
                                             <li><a href="#"><i class="fal fa-heart"></i></a></li>
                                             <li><a href="#"><i class="far fa-eye"></i></a></li>
@@ -305,3 +324,114 @@
         </div>
     </section>
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            // Handler for user selected product sizes
+            $('input.view-product-size').on('change', function() {
+                view_updateTotalPrice();
+
+            });
+
+            // Handler for user selected product options
+            $('input.view-product-option').on('change', function() {
+                view_updateTotalPrice();
+            });
+
+            $('.view-increment').on('click', function(e) {
+                e.preventDefault();
+                let productQuantity = $('.view-product-quantity');
+                let currentQuantity = parseFloat(productQuantity.val());
+                productQuantity.val(currentQuantity + 1);
+                view_updateTotalPrice();
+            })
+
+            // Handler for user to increase product quantity
+            $('.view-decrement').on('click', function(e) {
+                e.preventDefault();
+                let productQuantity = $('.view-product-quantity');
+                let currentQuantity = parseFloat(productQuantity.val());
+                if (currentQuantity > 1) {
+                    productQuantity.val(currentQuantity - 1);
+                    view_updateTotalPrice();
+                }
+            })
+
+        })
+
+        // Update total price of a product
+        function view_updateTotalPrice() {
+            let basePrice = parseFloat($('input.view_base_price').val());
+            let selectedSizePrice = 0;
+            let selectedOptionPrice = 0;
+            let productQuantity = parseFloat($('input.view-product-quantity').val());
+
+            // Calculate selected size price
+            let selectedSize = $('input.view-product-size:checked');
+            if (selectedSize.length > 0) {
+                selectedSizePrice = parseFloat(selectedSize.data("price"));
+            }
+
+            // Calculate all selected option price
+            let selectedOptions = $('input.view-product-option:checked');
+            $(selectedOptions).each(function() {
+                selectedOptionPrice += parseFloat($(this).data('price'));
+            });
+
+            // Calculate total price
+            let totalPrice = (basePrice + selectedOptionPrice + selectedSizePrice) * productQuantity;
+
+            $('#view_total_price').text("{{ config('settings.site_currency_icon') }}" + totalPrice);
+        }
+
+        $('.cart_modal_btn').on('click', function(e) {
+            e.preventDefault();
+            $('#view_add_to_cart_form').submit();
+        });
+
+        // Add product to cart
+        $('#view_add_to_cart_form').on('submit', function(e) {
+            e.preventDefault();
+
+            // Validation
+            let selectedSize = $('input.view-product-size');
+
+            if (selectedSize.length > 0) {
+                if ($('input.view-product-size:checked').val() === undefined) {
+                    toastr.error('Please select the product size');
+                    console.error('Please select the product size');
+                    return;
+                }
+            }
+
+            let formData = $(this).serialize();
+
+            $.ajax({
+                method: 'POST',
+                url: "{{ route('product.add-to-cart') }}",
+                data: formData,
+                beforeSend: function() {
+                    $('.cart_modal_btn').attr('disabled', true);
+                    $('.cart_modal_btn').html(
+                        "<span class='spinner-border spinner-border-sm text-light' role='status' aria-hidden='true'></span> Loading..."
+                    )
+                },
+                success: function(response) {
+                    refreshProductCart();
+                    toastr.success(response.message);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    let errorMessage = jqXHR.responseJSON.message;
+                    toastr.error(errorMessage);
+                },
+                complete: function() {
+                    $('.cart_modal_btn').html(
+                        "add to cart"
+                    );
+                    $('.cart_modal_btn').attr('disabled', false);
+                }
+            });
+        })
+    </script>
+@endpush

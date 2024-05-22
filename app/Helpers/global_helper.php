@@ -1,5 +1,6 @@
 <?php
 
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Str;
 
 /**
@@ -27,6 +28,9 @@ if (!function_exists('generateUniqueSlug')) {
     }
 }
 
+/**
+ * Positioning currency function
+ */
 if (!function_exists('currencyPosition')) {
     function currencyPosition($price): string
     {
@@ -35,5 +39,28 @@ if (!function_exists('currencyPosition')) {
         } else {
             return  $price . config('settings.site_currency_icon');
         }
+    }
+}
+
+/**
+ * Calculate cart total price
+ */
+if (!function_exists('cartTotalPrice')) {
+    function cartTotalPrice()
+    {
+        $total = 0;
+
+        foreach (Cart::content() as $product) {
+            $productPrice = $product->price;
+            $sizePrice = $product->options?->product_sizes['price'] ?? 0;
+            $optionPrice =  0;
+            foreach ($product->options->product_options as $productOption) {
+                $optionPrice += $productOption['price'];
+            }
+
+            $total += ($productPrice + $sizePrice + $optionPrice) * $product->qty;
+        }
+
+        return $total;
     }
 }

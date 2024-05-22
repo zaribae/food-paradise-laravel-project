@@ -20,11 +20,32 @@
 
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/custom.css') }}">
     <!-- <link rel="stylesheet" href="css/rtl.css"> -->
 </head>
 
 <body>
+    <div class="overlay-container d-none">
+        <div class="overlay">
+            <span class="loader"></span>
+        </div>
+    </div>
 
+    <!-- CART POPUT START -->
+    <div class="fp__cart_popup">
+        <div class="modal fade" id="cartModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body load_product_modal_content">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- CART POPUT END -->
+
+    {{-- {{ Cart::destroy() }} --}}
     <!--=============================
         TOPBAR START
     ==============================-->
@@ -116,22 +137,8 @@
     <script src="{{ asset('frontend/js/main.js') }}"></script>
     <script src="{{ asset('frontend/js/toastr.min.js') }}"></script>
 
-    <script>
-        toastr.options.closeButton = true;
-        toastr.options.progressBar = true;
-        @if ($errors->any())
-            @foreach ($errors->all() as $error)
-                toastr.error("{{ $error }}");
-            @endforeach
-        @endif
-
-        //Set csrf-token at Ajax Header
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $("meta[name='csrf-token']").attr('content')
-            }
-        });
-    </script>
+    <!-- Frontend custom Scripts -->
+    @include('frontend.layouts.frontend-scripts')
 
     @stack('scripts')
 </body>
