@@ -64,3 +64,27 @@ if (!function_exists('cartTotalPrice')) {
         return $total;
     }
 }
+
+/**
+ * Calculate single product in cart total price
+ */
+if (!function_exists('cartProductTotalPrice')) {
+    function cartProductTotalPrice($rowId)
+    {
+        $total = 0;
+
+        $product = Cart::get($rowId);
+
+        $productPrice = $product->price;
+        $productSizePrice = $product->options?->product_sizes['price'] ?? 0;
+        $productOptionPrice = 0;
+
+        foreach ($product->options->product_options as $productOptions) {
+            $productOptionPrice += $productOptions['price'];
+        }
+
+        $total = ($productPrice + $productSizePrice + $productOptionPrice) * $product->qty;
+
+        return $total;
+    }
+}

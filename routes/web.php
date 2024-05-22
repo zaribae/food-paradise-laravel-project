@@ -37,11 +37,14 @@ Route::get('/product-modal/{productId}', [HomeController::class, 'loadProductMod
 
 // Add product to cart Routes
 Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('product.add-to-cart');
-
 // Refresh product cart after adding new product Routes
 Route::get('/get-cart-product', [CartController::class, 'refreshCartProduct'])->name('product.refresh-cart');
-
 // Delete product from cart
 Route::get('/remove-cart-product/{rowId}', [CartController::class, 'deleteProduct'])->name('product.remove-cart');
+
+// Cart page route
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::get('/cart-product-clear', [CartController::class, 'productRemoveAll'])->name('cart.product-clear');
+Route::post('/cart-product-quantity-update', [CartController::class, 'productQuantityUpdate'])->name('cart.quantity-update');
 
 require __DIR__ . '/auth.php';

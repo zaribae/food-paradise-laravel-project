@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
 use Illuminate\View\View;
 use PhpParser\Node\Stmt\Return_;
@@ -14,6 +15,12 @@ use function Laravel\Prompts\alert;
 
 class CartController extends Controller
 {
+
+    function index(): View
+    {
+        return view('frontend.pages.cart-view');
+    }
+
     // Add product to Cart
     function addToCart(Request $request)
     {
@@ -83,6 +90,30 @@ class CartController extends Controller
                 'message' => 'Product removed from cart successfully'
             ], 200);
         } catch (\Exception $e) {
+            return response([
+                'status' => 'error',
+                'message' => 'Something went wrong!'
+            ], 500);
+        }
+    }
+
+    function productRemoveAll()
+    {
+        Cart::destroy();
+
+        return redirect()->back();
+    }
+
+    function productQuantityUpdate(Request $request): Response
+    {
+        try {
+            Cart::update($request->rowId, $request->qty);
+            return response([
+                'product_total_price' => cartProductTotalPrice($request->rowId),
+                'message' => 'Cart updated successfully!',
+            ], 200);
+        } catch (\Exception $e) {
+            logger($e);
             return response([
                 'status' => 'error',
                 'message' => 'Something went wrong!'
