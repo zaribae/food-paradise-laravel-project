@@ -47,4 +47,8 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::get('/cart-product-clear', [CartController::class, 'productRemoveAll'])->name('cart.product-clear');
 Route::post('/cart-product-quantity-update', [CartController::class, 'productQuantityUpdate'])->name('cart.quantity-update');
 
+// Coupon Routes
+Route::post('/coupon-apply', [HomeController::class, 'applyCoupon'])->name('coupon.apply');
+Route::get('/coupon-remove', [HomeController::class, 'removeCoupon'])->name('coupon.remove');
+
 require __DIR__ . '/auth.php';

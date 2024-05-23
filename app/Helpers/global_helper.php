@@ -88,3 +88,28 @@ if (!function_exists('cartProductTotalPrice')) {
         return $total;
     }
 }
+
+
+/**
+ * Calculate subtotal in cart price
+ */
+if (!function_exists('subTotalPrice')) {
+    function subTotalPrice()
+    {
+        $total = 0;
+        $cartTotal = cartTotalPrice();
+
+        if (session()->has('coupon')) {
+            $discount = session()->get('coupon')['discount'];
+
+            if ($cartTotal < $discount) {
+                $total = $cartTotal;
+            } else {
+                $total = $cartTotal - $discount;
+            }
+        } else {
+            $total = $cartTotal;
+        }
+        return $total;
+    }
+}

@@ -78,4 +78,11 @@
             }
         })
     }
+
+    /**
+     * Get user cart total price
+     */
+    function getCartTotalPrice() {
+        return parseInt('{{ cartTotalPrice() }}');
+    }
 </script>

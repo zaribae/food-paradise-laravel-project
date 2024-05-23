@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Benefit;
+use App\Models\Coupon;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\SectionTitle;
 use App\Models\Slider;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Collection as SupportCollection;
 
 class HomeController extends Controller
@@ -57,5 +59,68 @@ class HomeController extends Controller
 
         // dd($product);
         return view('frontend.layouts.ajax-request-files.product-modal-popup', compact('product'))->render();
+    }
+
+    function applyCoupon(Request $request)
+    {
+        $totalPrice = $request->subtotal;
+        $couponCode = $request->code;
+
+        $coupon = Coupon::where('code', $couponCode)->first();
+
+        if (!$coupon) {
+            return response([
+                'message' => 'Invalid coupon code!'
+            ], 422);
+        }
+
+        if ($coupon->quantity === 0) {
+            return response([
+                'message' => 'Coupon has been fully redeemed!'
+            ], 422);
+        }
+
+        if ($coupon->expired_date < now()) {
+            return response([
+                'message' => 'Coupon has expired!'
+            ], 422);
+        }
+
+        if ($coupon->discount_type === 'percent') {
+            $discount = number_format($totalPrice * ($coupon->discount / 100), 2);
+        } else {
+            $discount = $coupon->discount;
+        }
+
+        $finalPrice = $totalPrice - $discount;
+
+        session()->put('coupon', [
+            'code' => $couponCode,
+            'discount' => $discount
+        ]);
+
+        return response([
+            'message' => 'Coupon applied Successfully!',
+            'discount_price' => $discount,
+            'final_price' => $finalPrice,
+            'coupon_code' => $couponCode
+        ]);
+    }
+
+    function removeCoupon()
+    {
+        try {
+            //code...
+            session()->forget('coupon');
+
+            return response([
+                'message' => 'Coupon removed Successfully!',
+                'cart_subtotal' => subTotalPrice(),
+            ]);
+        } catch (\Exception $e) {
+            return response([
+                'message' => 'Something went Wrong'
+            ]);
+        }
     }
 }

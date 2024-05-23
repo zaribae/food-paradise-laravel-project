@@ -93,7 +93,9 @@ class CartController extends Controller
 
             return response([
                 'status' => 'success',
-                'message' => 'Product removed from cart successfully'
+                'message' => 'Product removed from cart successfully',
+                'cart_total' => cartTotalPrice(),
+                'cart_subtotal' => subTotalPrice()
             ], 200);
         } catch (\Exception $e) {
             return response([
@@ -106,7 +108,7 @@ class CartController extends Controller
     function productRemoveAll()
     {
         Cart::destroy();
-
+        session()->forget('coupon');
         return redirect()->back();
     }
 
@@ -125,9 +127,11 @@ class CartController extends Controller
         try {
             $cart = Cart::update($request->rowId, $request->qty);
             return response([
+                'status' => 'success',
                 'product_total_price' => cartProductTotalPrice($request->rowId),
-                'message' => 'Cart updated successfully!',
                 'qty' => $cart->qty < 1 ? 1 : $cart->qty,
+                'cart_total' => cartTotalPrice(),
+                'cart_subtotal' => subTotalPrice()
             ], 200);
         } catch (\Exception $e) {
             logger($e);

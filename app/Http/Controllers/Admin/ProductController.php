@@ -102,10 +102,6 @@ class ProductController extends Controller
             $product->slug = generateUniqueSlug('Product', $request->name);
         }
 
-        if ($product->quantity) {
-            $product->quantity = $request->quantity;
-        }
-
         $product->update($request->validated());
 
         toastr()->success('Product content updated Successfully!');
