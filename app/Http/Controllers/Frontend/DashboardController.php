@@ -40,7 +40,7 @@ class DashboardController extends Controller
 
         toastr()->success('Address added successfully!');
 
-        return to_route('dashboard');
+        return redirect()->back();
     }
 
     function updateAddress(AddressUpdateRequest $request, string $addressId)

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\DashboardController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\ProfileController;
@@ -54,5 +55,10 @@ Route::post('/cart-product-quantity-update', [CartController::class, 'productQua
 Route::post('/coupon-apply', [HomeController::class, 'applyCoupon'])->name('coupon.apply');
 Route::get('/coupon-remove', [HomeController::class, 'removeCoupon'])->name('coupon.remove');
 
+// Checkout Routes
+Route::group([], function () {
+    Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+    Route::get('/checkout/{addressId}/delivery-total', [CheckoutController::class, 'calculateDeliveryTotal'])->name('checkout.delivery-total');
+})->middleware(['auth', 'verified']);
 
 require __DIR__ . '/auth.php';
