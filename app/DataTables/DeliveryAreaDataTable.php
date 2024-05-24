@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\DeliveryAddress;
+use App\Models\DeliveryArea;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -12,7 +12,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class DeliveryAddressDataTable extends DataTable
+class DeliveryAreaDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -26,8 +26,8 @@ class DeliveryAddressDataTable extends DataTable
                 return currencyPosition($query->delivery_cost);
             })
             ->addColumn('action', function ($query) {
-                $edit = "<a href='" . route('admin.delivery-address.edit', $query->id) . "' class='btn btn-success'><i class='fas fa-pencil-alt'></i></a>";
-                $delete = "<a href='" . route('admin.delivery-address.destroy', $query->id) . "' class='btn btn-danger ml-3 delete-item'><i class='fas fa-trash-alt'></i></a>";
+                $edit = "<a href='" . route('admin.delivery-area.edit', $query->id) . "' class='btn btn-success'><i class='fas fa-pencil-alt'></i></a>";
+                $delete = "<a href='" . route('admin.delivery-area.destroy', $query->id) . "' class='btn btn-danger ml-3 delete-item'><i class='fas fa-trash-alt'></i></a>";
 
                 return $edit . $delete;
             })
@@ -45,7 +45,7 @@ class DeliveryAddressDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(DeliveryAddress $model): QueryBuilder
+    public function query(DeliveryArea $model): QueryBuilder
     {
         return $model->newQuery();
     }
@@ -56,11 +56,11 @@ class DeliveryAddressDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('deliveryaddress-table')
+            ->setTableId('deliveryarea-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             //->dom('Bfrtip')
-            ->orderBy(1)
+            ->orderBy(0)
             ->selectStyleSingle()
             ->buttons([
                 Button::make('excel'),
@@ -79,7 +79,7 @@ class DeliveryAddressDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('address'),
+            Column::make('area_name'),
             Column::make('min_delivery_time'),
             Column::make('max_delivery_time'),
             Column::make('delivery_cost'),
@@ -97,6 +97,6 @@ class DeliveryAddressDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'DeliveryAddress_' . date('YmdHis');
+        return 'DeliveryArea_' . date('YmdHis');
     }
 }

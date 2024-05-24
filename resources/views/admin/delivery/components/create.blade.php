@@ -10,11 +10,11 @@
                 <h4>Create New Address</h4>
             </div>
             <div class="card-body">
-                <form action="{{ route('admin.delivery-address.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.delivery-area.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="address">Delivery Address</label>
-                        <textarea name="address" id="address" type="text" class="form-control"></textarea>
+                        <input name="area_name" id="address" type="text" class="form-control">
                     </div>
                     <div class="row">
                         <div class="col-md-6">

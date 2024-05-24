@@ -27,6 +27,9 @@ Route::group([], function () {
     Route::patch('/profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
     Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password.update');
     Route::post('/profile/picture', [ProfileController::class, 'updatePicture'])->name('profile.picture.update');
+    Route::post('/profile/address', [DashboardController::class, 'createAddress'])->name('profile.address.create');
+    Route::patch('/profile/address/{addressId}/edit', [DashboardController::class, 'updateAddress'])->name('profile.address.update');
+    Route::delete('/profile/address/{addressId}', [DashboardController::class, 'removeAddress'])->name('profile.address.remove');
 })->middleware(['auth', 'verified']);
 
 // Product Routes

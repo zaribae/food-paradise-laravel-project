@@ -10,7 +10,7 @@
                 <h4>Edit Address</h4>
             </div>
             <div class="card-body">
-                <form action="{{ route('admin.delivery-address.update', $deliveryAddress->id) }}" method="POST"
+                <form action="{{ route('admin.delivery-area.update', $deliveryAddress->id) }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')

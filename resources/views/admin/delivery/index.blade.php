@@ -9,7 +9,7 @@
             <div class="card-header">
                 <h4>All Delivery Address</h4>
                 <div class="card-header-action">
-                    <a href="{{ route('admin.delivery-address.create') }}" class="btn btn-primary">
+                    <a href="{{ route('admin.delivery-area.create') }}" class="btn btn-primary">
                         Create New
                     </a>
                 </div>

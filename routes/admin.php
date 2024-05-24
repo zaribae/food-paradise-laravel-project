@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\BenefitController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\DeliveryAddressesController;
+use App\Http\Controllers\Admin\DeliveryAreaController;
 use App\Http\Controllers\Admin\ProductCategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductGalleryController;
@@ -50,8 +51,8 @@ Route::prefix('/admin')->as('admin.')->group(function () {
     // Coupon Route
     Route::resource('/coupon', CouponController::class);
 
-    // Delivery Address Routes
-    Route::resource('/delivery-address', DeliveryAddressesController::class);
+    // Delivery Area Routes
+    Route::resource('/delivery-area', DeliveryAreaController::class);
 
     // Setting Route
     Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');

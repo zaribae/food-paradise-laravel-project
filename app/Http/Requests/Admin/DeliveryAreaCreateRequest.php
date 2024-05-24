@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DeliveryAddressCreateRequest extends FormRequest
+class DeliveryAreaCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,7 @@ class DeliveryAddressCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'address' => ['required', 'max:255'],
+            'area_name' => ['required', 'max:255'],
             'min_delivery_time' => ['required', 'max:50'],
             'max_delivery_time' => ['required', 'max:50'],
             'delivery_cost' => ['required', 'numeric'],
