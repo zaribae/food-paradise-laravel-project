@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\BenefitController;
 use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\DeliveryAddressesController;
 use App\Http\Controllers\Admin\ProductCategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductGalleryController;
@@ -48,6 +49,9 @@ Route::prefix('/admin')->as('admin.')->group(function () {
     // Manage Ecommerce Route
     // Coupon Route
     Route::resource('/coupon', CouponController::class);
+
+    // Delivery Address Routes
+    Route::resource('/delivery-address', DeliveryAddressesController::class);
 
     // Setting Route
     Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');

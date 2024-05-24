@@ -51,4 +51,5 @@ Route::post('/cart-product-quantity-update', [CartController::class, 'productQua
 Route::post('/coupon-apply', [HomeController::class, 'applyCoupon'])->name('coupon.apply');
 Route::get('/coupon-remove', [HomeController::class, 'removeCoupon'])->name('coupon.remove');
 
+
 require __DIR__ . '/auth.php';

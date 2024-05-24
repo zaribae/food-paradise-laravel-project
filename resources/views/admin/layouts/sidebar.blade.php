@@ -264,6 +264,8 @@
                     <span>Manage Ecommerce</span></a>
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="{{ route('admin.coupon.index') }}">Coupons</a></li>
+                    <li><a class="nav-link" href="{{ route('admin.delivery-address.index') }}">Delivery Addresses</a>
+                    </li>
             </li>
         </ul>
         </li>
