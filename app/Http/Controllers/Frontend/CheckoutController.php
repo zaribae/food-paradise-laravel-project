@@ -23,7 +23,7 @@ class CheckoutController extends Controller
             $address = Address::findOrFail($addressId);
 
             $deliveryCost = $address->deliveryArea?->delivery_cost;
-            $cartSubtotal = subTotalPrice() + $deliveryCost;
+            $cartSubtotal = subTotalPrice($deliveryCost);
 
             return response([
                 'delivery_cost' => $deliveryCost,
@@ -34,5 +34,23 @@ class CheckoutController extends Controller
                 'message' => 'Something went wrong!'
             ], 422);
         }
+    }
+
+    function checkoutPayment(Request $request)
+    {
+        $request->validate([
+            'id' => ['required', 'integer']
+        ]);
+
+        $address = Address::with('deliveryArea')->findOrFail($request->id);
+
+        $selectedAddress = $address->address . ', Delivery Area: ' . $address->deliveryArea?->area_name;
+
+        session()->put('address', $selectedAddress);
+        session()->put('delivery_cost', $address->deliveryArea->delivery_cost);
+
+        return response([
+            'redirect_url' => route('checkout.payment.index'),
+        ]);
     }
 }

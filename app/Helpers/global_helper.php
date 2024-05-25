@@ -94,7 +94,7 @@ if (!function_exists('cartProductTotalPrice')) {
  * Calculate subtotal in cart price
  */
 if (!function_exists('subTotalPrice')) {
-    function subTotalPrice()
+    function subTotalPrice($deliveryCost = 0)
     {
         $total = 0;
         $cartTotal = cartTotalPrice();
@@ -103,12 +103,12 @@ if (!function_exists('subTotalPrice')) {
             $discount = session()->get('coupon')['discount'];
 
             if ($cartTotal < $discount) {
-                $total = $cartTotal;
+                $total = $cartTotal + $deliveryCost;
             } else {
-                $total = $cartTotal - $discount;
+                $total = ($cartTotal + $deliveryCost) - $discount;
             }
         } else {
-            $total = $cartTotal;
+            $total = $cartTotal + $deliveryCost;
         }
         return $total;
     }

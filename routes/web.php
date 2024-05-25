@@ -5,6 +5,7 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\DashboardController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Frontend\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -59,6 +60,10 @@ Route::get('/coupon-remove', [HomeController::class, 'removeCoupon'])->name('cou
 Route::group([], function () {
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
     Route::get('/checkout/{addressId}/delivery-total', [CheckoutController::class, 'calculateDeliveryTotal'])->name('checkout.delivery-total');
+    Route::post('/checkout', [CheckoutController::class, 'checkoutPayment'])->name('checkout.redirect.payment');
+
+    // Payment Route
+    Route::get('/checkout/payment', [PaymentController::class, 'index'])->name('checkout.payment.index');
 })->middleware(['auth', 'verified']);
 
 require __DIR__ . '/auth.php';

@@ -171,7 +171,7 @@
                                 @endif
                             </span></p>
 
-                        <a class="common_btn" href=" #">checkout</a>
+                        <a class="common_btn" id="proceed_payment_btn" href="#">Proceed to Payment</a>
                     </div>
                 </div>
             </div>
@@ -199,6 +199,38 @@
                             ':deliveryCost', response.delivery_cost))
                         cartSubtotal.text("{{ currencyPosition(':cartSubTotal') }}".replace(
                             ':cartSubTotal', response.cart_subtotal))
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        let errorMessage = jqXHR.responseJSON.message;
+                        hideLoader();
+                        toastr.error(errorMessage);
+                    },
+                    complete: function() {
+                        hideLoader();
+                    }
+                });
+            });
+
+            $('#proceed_payment_btn').on('click', function(e) {
+                e.preventDefault();
+                let address = $('.view_address_checkout:checked');
+
+                if (address.length === 0) {
+                    toastr.error('Please Select an Address!');
+                    return;
+                }
+
+                $.ajax({
+                    method: 'POST',
+                    url: "{{ route('checkout.redirect.payment') }}",
+                    data: {
+                        id: address.val(),
+                    },
+                    beforeSend: function() {
+                        showLoader();
+                    },
+                    success: function(response) {
+                        window.location.href = response.redirect_url;
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         let errorMessage = jqXHR.responseJSON.message;
