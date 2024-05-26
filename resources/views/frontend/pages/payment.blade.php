@@ -23,9 +23,10 @@
                     <div class="fp__payment_area">
                         <div class="row">
                             <div class="col-lg-3 col-6 col-sm-4 col-md-3 wow fadeInUp" data-wow-duration="1s">
-                                <a class="fp__single_payment" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                    href="#">
-                                    <img src="images/pay_1.jpg" alt="payment method" class="img-fluid w-100">
+                                <a class="fp__single_payment payment-card" data-name="paypal" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal" href="#">
+                                    <img src="{{ asset('frontend/images/pay_1.jpg') }}" alt="payment method"
+                                        class="img-fluid w-100">
                                 </a>
                             </div>
                         </div>
@@ -82,3 +83,37 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('.payment-card').on('click', function(e) {
+                e.preventDefault();
+                let paymentGateway = $(this).data('name');
+
+                $.ajax({
+                    method: 'POST',
+                    url: "{{ route('checkout.payment.create') }}",
+                    data: {
+                        payment_gateway: paymentGateway
+                    },
+                    beforeSend: function() {
+                        showLoader();
+                    },
+                    success: function(response) {
+
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        let errorMessage = jqXHR.responseJSON.errors;
+                        $.each(errorMessage, function(index, value) {
+                            toastr.error(value);
+                        });
+                    },
+                    complete: function() {
+                        hideLoader();
+                    }
+                })
+            });
+        })
+    </script>
+@endpush

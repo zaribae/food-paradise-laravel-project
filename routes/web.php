@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // User Routes
-Route::group([], function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::patch('/profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
     Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password.update');
@@ -32,7 +32,7 @@ Route::group([], function () {
     Route::post('/profile/address', [DashboardController::class, 'createAddress'])->name('profile.address.create');
     Route::patch('/profile/address/{addressId}/edit', [DashboardController::class, 'updateAddress'])->name('profile.address.update');
     Route::delete('/profile/address/{addressId}', [DashboardController::class, 'removeAddress'])->name('profile.address.remove');
-})->middleware(['auth', 'verified']);
+});
 
 // Product Routes
 Route::get('/product/{slug}', [HomeController::class, 'showProduct'])->name('product.show');
@@ -57,13 +57,15 @@ Route::post('/coupon-apply', [HomeController::class, 'applyCoupon'])->name('coup
 Route::get('/coupon-remove', [HomeController::class, 'removeCoupon'])->name('coupon.remove');
 
 // Checkout Routes
-Route::group([], function () {
+
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
     Route::get('/checkout/{addressId}/delivery-total', [CheckoutController::class, 'calculateDeliveryTotal'])->name('checkout.delivery-total');
     Route::post('/checkout', [CheckoutController::class, 'checkoutPayment'])->name('checkout.redirect.payment');
 
     // Payment Route
     Route::get('/checkout/payment', [PaymentController::class, 'index'])->name('checkout.payment.index');
-})->middleware(['auth', 'verified']);
+    Route::post('/checkout/payment', [PaymentController::class, 'makePayment'])->name('checkout.payment.create');
+});
 
 require __DIR__ . '/auth.php';

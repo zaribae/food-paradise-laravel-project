@@ -113,3 +113,19 @@ if (!function_exists('subTotalPrice')) {
         return $total;
     }
 }
+
+
+/**
+ * Generate Invoice Id
+ */
+if (!function_exists('generateInvoiceId')) {
+    function generateInvoiceId()
+    {
+        $randomNumber = rand(1, 99999999);
+        $currentDate = now();
+
+        $invoiceId = $randomNumber . $currentDate->format('ymd') . $currentDate->format('s');
+
+        return $invoiceId;
+    }
+}
