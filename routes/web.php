@@ -66,6 +66,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Payment Route
     Route::get('/checkout/payment', [PaymentController::class, 'index'])->name('checkout.payment.index');
     Route::post('/checkout/payment', [PaymentController::class, 'makePayment'])->name('checkout.payment.create');
+
+    Route::get('/payment-success', [PaymentController::class, 'paymentSuccess'])->name('payment-success');
+    Route::get('/payment-canceled', [PaymentController::class, 'paymentCancel'])->name('payment-cancel');
+
+    Route::get('/paypal/payment', [PaymentController::class, 'payWithPaypal'])->name('paypal.payment');
+    Route::get('/paypal/success', [PaymentController::class, 'paypalSuccess'])->name('paypal.payment.success');
+    Route::get('/paypal/cancel', [PaymentController::class, 'paypalCancel'])->name('paypal.payment.cancel');
 });
 
 require __DIR__ . '/auth.php';

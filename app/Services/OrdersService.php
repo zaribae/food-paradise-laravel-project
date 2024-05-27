@@ -17,6 +17,7 @@ final class OrdersService
             $order->invoice_id = generateInvoiceId();
             $order->user_id = auth()->user()->id;
             $order->address = session()->get('address');
+            $order->delivery_area_id = session()->get('delivery_area_id');
             if (session()->has('coupon')) {
                 $order->discount = session()->get('coupon')['discount'];
                 $order->coupon_info = json_encode(session()->get('coupon'));
@@ -46,6 +47,11 @@ final class OrdersService
                 $orderItem->save();
             }
 
+            // Put order id to session
+            session()->put('order_id', $order->id);
+            // Put the orders grand total to session
+            session()->put('grand_total', $order->grand_total);
+
             return true;
         } catch (\Exception $e) {
             logger($e);
@@ -56,5 +62,12 @@ final class OrdersService
     /** Clear Session Items */
     function clearSession()
     {
+        Cart::destroy();
+        session()->forget('coupon');
+        session()->forget('address');
+        session()->forget('delivery_cost');
+        session()->forget('delivery_area_id');
+        session()->forget('order_id');
+        session()->forget('grand_total');
     }
 }
