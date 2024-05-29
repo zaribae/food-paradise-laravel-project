@@ -17,7 +17,7 @@ final class OrdersService
             $order->invoice_id = generateInvoiceId();
             $order->user_id = auth()->user()->id;
             $order->address = session()->get('address');
-            $order->delivery_area_id = session()->get('delivery_area_id');
+            $order->address_id = session()->get('address_id');
             if (session()->has('coupon')) {
                 $order->discount = session()->get('coupon')['discount'];
                 $order->coupon_info = json_encode(session()->get('coupon'));
@@ -43,7 +43,7 @@ final class OrdersService
                 $orderItem->product_price = $product->price;
                 $orderItem->qty = $product->qty;
                 $orderItem->product_size = json_encode($product->options?->product_sizes);
-                $orderItem->product_size = json_encode($product->options?->product_options);
+                $orderItem->product_option = json_encode($product->options?->product_options);
                 $orderItem->save();
             }
 
@@ -66,7 +66,7 @@ final class OrdersService
         session()->forget('coupon');
         session()->forget('address');
         session()->forget('delivery_cost');
-        session()->forget('delivery_area_id');
+        session()->forget('address_id');
         session()->forget('order_id');
         session()->forget('grand_total');
     }

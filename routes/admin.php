@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\BenefitController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\DeliveryAddressesController;
 use App\Http\Controllers\Admin\DeliveryAreaController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PaymentGatewaySettingController;
 use App\Http\Controllers\Admin\ProductCategoryController;
 use App\Http\Controllers\Admin\ProductController;
@@ -47,6 +48,15 @@ Route::prefix('/admin')->as('admin.')->group(function () {
 
     // Product Option Route
     Route::resource('/product-option', ProductOptionController::class);
+
+    // Orders Route
+    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('/orders/{orderId}', [OrderController::class, 'show'])->name('orders.show');
+    Route::delete('/orders/{orderId}', [OrderController::class, 'removeOrder'])->name('orders.destroy');
+
+    Route::get('/orders/status/{orderId}', [OrderController::class, 'getOrderStatus'])->name('orders.status');
+    Route::patch('/orders/status-update/{orderId}', [OrderController::class, 'updateStatus'])->name('orders.status-update');
+
 
     // Manage Ecommerce Route
     // Coupon Route
