@@ -86,34 +86,39 @@
                                         <th class="text-center">Quantity</th>
                                         <th class="text-right">Totals</th>
                                     </tr>
-                                    @foreach (@$order->orderItems as $orderItem)
+                                    @foreach ($order->orderItems as $item)
                                         @php
-                                            $size = json_decode($orderItem->product_size);
-                                            $productOption = json_decode($orderItem->product_option);
+                                            $size = json_decode($item->product_size);
+                                            $options = json_decode($item->product_option);
 
-                                            $qty = $orderItem->qty;
-                                            $productPrice = $orderItem->product_price;
-                                            $sizePrice = $size->price;
+                                            $qty = $item->qty;
+                                            $productPrice = $item->product_price;
+                                            $sizePrice = $size->price ?? 0;
                                             $optionPrice = 0;
 
-                                            foreach ($productOption as $optionItem) {
+                                            foreach (@$options as $optionItem) {
                                                 $optionPrice += $optionItem->price;
                                             }
 
                                             $productTotalPrice = ($productPrice + $sizePrice + $optionPrice) * $qty;
-
                                         @endphp
                                         <tr>
                                             <td>{{ ++$loop->index }}</td>
-                                            <td>{{ $orderItem->product_name }}</td>
-                                            <td>{{ @$size->name }} ({{ currencyPosition(@$size->price) }})<br>
-                                                options
-                                                @foreach ($productOption as $option)
-                                                    {{ @$option->name }} ({{ currencyPosition(@$option->price) }})
-                                                @endforeach
-                                            </td>
-                                            <td class="text-center">{{ currencyPosition(@$orderItem->product_price) }}</td>
-                                            <td class="text-center">{{ $orderItem->qty }}</td>
+                                            <td>{{ $item->product_name }}</td>
+                                            @if ($size != null || $options != null)
+                                                <td>{{ @$size->name }} ({{ currencyPosition(@$size->price) }})<br>
+                                                    options <br>
+                                                    @foreach (@$options as $option)
+                                                        {{ @$option->name }}
+                                                        ({{ currencyPosition(@$option->price) }})
+                                                        <br>
+                                                    @endforeach
+                                                </td>
+                                            @else
+                                                <td>-</td>
+                                            @endif
+                                            <td class="text-center">{{ currencyPosition(@$item->product_price) }}</td>
+                                            <td class="text-center">{{ $item->qty }}</td>
                                             <td class="text-right">{{ currencyPosition(@$productTotalPrice) }}</td>
                                         </tr>
                                     @endforeach

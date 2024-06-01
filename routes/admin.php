@@ -57,6 +57,12 @@ Route::prefix('/admin')->as('admin.')->group(function () {
     Route::get('/orders/status/{orderId}', [OrderController::class, 'getOrderStatus'])->name('orders.status');
     Route::patch('/orders/status-update/{orderId}', [OrderController::class, 'updateStatus'])->name('orders.status-update');
 
+    Route::get('/pending-orders', [OrderController::class, 'pendingOrder'])->name('pending-orders.index');
+    Route::get('/in-process-orders', [OrderController::class, 'inProcessOrder'])->name('in-process-orders.index');
+    Route::get('/delivered-orders', [OrderController::class, 'deliveredOrder'])->name('delivered-orders.index');
+    Route::get('/declined-orders', [OrderController::class, 'declinedOrder'])->name('declined-orders.index');
+
+
 
     // Manage Ecommerce Route
     // Coupon Route

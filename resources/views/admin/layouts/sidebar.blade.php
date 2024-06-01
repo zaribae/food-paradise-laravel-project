@@ -255,8 +255,11 @@
                     <span>Orders</span></a>
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="{{ route('admin.orders.index') }}">All Orders</a></li>
-                    {{-- <li><a class="nav-link" href="{{ route('admin.product-category.index') }}">Product Categories</a>
-                    </li> --}}
+                    <li><a class="nav-link" href="{{ route('admin.pending-orders.index') }}">Pending Orders</a>
+                    <li><a class="nav-link" href="{{ route('admin.in-process-orders.index') }}">In Process Orders</a>
+                    <li><a class="nav-link" href="{{ route('admin.delivered-orders.index') }}">Delivered Orders</a>
+                    <li><a class="nav-link" href="{{ route('admin.declined-orders.index') }}">Declined Orders</a>
+                    </li>
                 </ul>
             </li>
             <li class="dropdown">
