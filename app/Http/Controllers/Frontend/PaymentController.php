@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Events\OrderPaymentUpdateEvent;
 use App\Events\OrderPlacedNotificationEvent;
+use App\Events\RealTimeOrderPlacedNotificationEvent;
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Services\OrdersService;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -142,6 +144,7 @@ class PaymentController extends Controller
 
             OrderPaymentUpdateEvent::dispatch($orderId, $paymentInfo, 'PayPal');
             OrderPlacedNotificationEvent::dispatch($orderId);
+            RealTimeOrderPlacedNotificationEvent::dispatch(Order::find($orderId));
 
             // Clear all payment session
             $ordersService->clearSession();

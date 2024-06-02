@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\RealTimeOrderPlacedNotificationEvent;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
@@ -7,6 +8,7 @@ use App\Http\Controllers\Frontend\DashboardController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Frontend\ProfileController;
+use App\Models\Order;
 use Illuminate\Support\Facades\Route;
 
 /*

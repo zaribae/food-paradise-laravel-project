@@ -10,6 +10,7 @@ use App\DataTables\OrderDataTable;
 use App\DataTables\PendingOrderDataTable;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\OrderPlacedNotification;
 use Dotenv\Util\Str;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -29,6 +30,7 @@ class OrderController extends Controller
     function show(string $orderId): View
     {
         $order = Order::findOrFail($orderId);
+        $notification = OrderPlacedNotification::where('order_id', $orderId)->update(['seen' => 1]);
         return view('admin.order.components.show', compact('order'));
     }
 

@@ -62,7 +62,8 @@ Route::prefix('/admin')->as('admin.')->group(function () {
     Route::get('/delivered-orders', [OrderController::class, 'deliveredOrder'])->name('delivered-orders.index');
     Route::get('/declined-orders', [OrderController::class, 'declinedOrder'])->name('declined-orders.index');
 
-
+    // Order Notification Routes
+    Route::get('/notification-clear', [AdminDashboardController::class, 'clearNotification'])->name('clear-notification');
 
     // Manage Ecommerce Route
     // Coupon Route
@@ -78,4 +79,7 @@ Route::prefix('/admin')->as('admin.')->group(function () {
     // Setting Route
     Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
     Route::patch('/setting/general-setting', [SettingController::class, 'updateGeneralSetting'])->name('setting.general-setting.update');
+
+    // Pusher Setting Route
+    Route::patch('/pusher-setting', [SettingController::class, 'updatePusherSetting'])->name('pusher-setting.update');
 });

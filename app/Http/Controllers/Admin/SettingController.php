@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Setting;
 use App\Services\SettingsService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -35,6 +36,30 @@ class SettingController extends Controller
         $siteSettings->clearCachedSettings();
 
         toastr()->success('Settings Updated Successfully!');
+
+        return redirect()->back();
+    }
+
+    function updatePusherSetting(Request $request): RedirectResponse
+    {
+        $validatedData = $request->validate([
+            'pusher_app_id' => ['required', 'max:255'],
+            'pusher_key' => ['required', 'max:255'],
+            'pusher_secret' => ['required', 'max:255'],
+            'pusher_cluster' => ['required', 'max:255'],
+        ]);
+
+        foreach ($validatedData as $key => $value) {
+            Setting::updateOrCreate(
+                ['key' => $key],
+                ['value' => $value],
+            );
+        }
+
+        $siteSettings = app(SettingsService::class);
+        $siteSettings->clearCachedSettings();
+
+        toastr()->success('Pusher Settings Updated Successfully!');
 
         return redirect()->back();
     }
