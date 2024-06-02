@@ -257,6 +257,9 @@
             </li>
         </ul>
         </li>
+        <li><a class="nav-link" href="{{ route('admin.livechat.index') }}"><i class="far fa-square"></i>
+                <span>Livechat</span></a></li>
+
         <li><a class="nav-link" href="{{ route('admin.setting.index') }}"><i class="far fa-square"></i>
                 <span>Settings</span></a></li>
 

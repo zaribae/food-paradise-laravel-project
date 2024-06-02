@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\BenefitController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\DeliveryAddressesController;
 use App\Http\Controllers\Admin\DeliveryAreaController;
+use App\Http\Controllers\Admin\LivechatController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PaymentGatewaySettingController;
 use App\Http\Controllers\Admin\ProductCategoryController;
@@ -75,6 +76,10 @@ Route::prefix('/admin')->as('admin.')->group(function () {
     // Payment Gateway Settings Route
     Route::get('/payment-gateways-setting', [PaymentGatewaySettingController::class, 'index'])->name('payment-settings.index');
     Route::patch('/payment-gateways-setting', [PaymentGatewaySettingController::class, 'paypalSettingUpdate'])->name('payment-settings.update');
+
+    // Livechat Routes
+    Route::get('/livechat', [LivechatController::class, 'index'])->name('livechat.index');
+    Route::get('/livechat/get-messages/{senderId}', [LivechatController::class, 'getMessages'])->name('livechat.get-messages');
 
     // Setting Route
     Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');

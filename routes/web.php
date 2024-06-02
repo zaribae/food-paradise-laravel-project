@@ -6,6 +6,7 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\DashboardController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\LivechatController;
 use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Frontend\ProfileController;
 use App\Models\Order;
@@ -34,6 +35,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/profile/address', [DashboardController::class, 'createAddress'])->name('profile.address.create');
     Route::patch('/profile/address/{addressId}/edit', [DashboardController::class, 'updateAddress'])->name('profile.address.update');
     Route::delete('/profile/address/{addressId}', [DashboardController::class, 'removeAddress'])->name('profile.address.remove');
+
+    // Livechat Routes
+    Route::post('/livechat/send-message', [LivechatController::class, 'sendMessage'])->name('livechat.send-message');
 });
 
 // Product Routes
