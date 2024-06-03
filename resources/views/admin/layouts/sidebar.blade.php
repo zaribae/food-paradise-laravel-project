@@ -72,9 +72,14 @@
         </div> --}}
     </form>
     <ul class="navbar-nav navbar-right">
-        <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
-                class="nav-link nav-link-lg message-toggle beep"><i class="far fa-envelope"></i></a>
-            <div class="dropdown-menu dropdown-list dropdown-menu-right">
+        @php
+            $notifications = \App\Models\OrderPlacedNotification::where('seen', 0)->latest()->take(6)->get();
+            $unseenMessages = \App\Models\Livechat::where(['receiver_id' => auth()->user()->id, 'seen' => 0])->count();
+        @endphp
+        <li class="dropdown dropdown-list-toggle"><a href="{{ route('admin.livechat.index') }}" data-toggle="dropdown"
+                class="nav-link nav-link-lg message-notification {{ $unseenMessages > 0 ? 'beep' : '' }}"><i
+                    class="far fa-envelope"></i></a>
+            {{-- <div class="dropdown-menu dropdown-list dropdown-menu-right">
                 <div class="dropdown-header">Messages
                     <div class="float-right">
                         <a href="#">Mark All As Read</a>
@@ -137,12 +142,8 @@
                 <div class="dropdown-footer text-center">
                     <a href="#">View All <i class="fas fa-chevron-right"></i></a>
                 </div>
-            </div>
+            </div> --}}
         </li>
-
-        @php
-            $notifications = \App\Models\OrderPlacedNotification::where('seen', 0)->latest()->take(6)->get();
-        @endphp
         <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
                 class="nav-link notification-toggle nav-link-lg notification-beep {{ count($notifications) > 0 ? 'beep' : '' }}"><i
                     class="far fa-bell"></i></a>
@@ -223,8 +224,7 @@
             <li><a class="nav-link" href="{{ route('admin.benefit.index') }}"><i class="far fa-square"></i>
                     <span>Benefit of Choosing Us</span></a></li>
             <li class="dropdown">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                        class="fas fa-columns"></i>
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
                     <span>Orders</span></a>
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="{{ route('admin.orders.index') }}">All Orders</a></li>
@@ -236,8 +236,7 @@
                 </ul>
             </li>
             <li class="dropdown">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                        class="fas fa-columns"></i>
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
                     <span>Manage Restaurant</span></a>
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="{{ route('admin.product.index') }}">Products</a></li>

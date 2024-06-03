@@ -30,8 +30,7 @@
                 </div>
                 <form class="fp__single_chat_bottom chat-input" method="post">
                     @csrf
-                    <label for="select_file"><i class="far fa-file-medical" aria-hidden="true"></i></label>
-                    <input id="select_file" type="file" hidden="">
+                    <input type="hidden" name="message_temp_id" class="message-temp-id" value="">
                     <input type="text" class="fp-send-message" placeholder="Type a message..." name="message">
                     <input type="hidden" name="receiver_id" value="1">
 
@@ -46,8 +45,55 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
+            var userId = "{{ auth()->user()->id }}";
+
+            function scrollToRecent() {
+                let chatContent = $('.fp__chat_body');
+                chatContent.scrollTop(chatContent.prop("scrollHeight"));
+            }
+
+            // Get Messages
+            $('.fp-livechat').on('click', function(e) {
+                let senderId = 1;
+
+                $.ajax({
+                    method: 'GET',
+                    url: "{{ route('livechat.get-messages', ':senderId') }}".replace(
+                        ':senderId',
+                        senderId),
+                    beforeSend: function() {
+
+                    },
+                    success: function(response) {
+                        $('.fp__chat_body').empty();
+
+                        $.each(response, function(index, message) {
+                            let html = `<div class="fp__chating ${message.sender_id == userId ? "tf_chat_right" : ""}">
+                        <div class="fp__chating_img">
+                            <img src="${message.sender.image}" alt="person" class="img-fluid w-100 rounded-circle">
+                        </div>
+                        <div class="fp__chating_text">
+                            <p>${message.message}</p>
+                        </div>
+                    </div>`;
+
+                            $('.fp__chat_body').append(html);
+                            $('.unseen-message-count').text(0);
+                        });
+                        scrollToRecent();
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+
+                    }
+                })
+            })
+
+            // Send Message
             $('.chat-input').on('submit', function(e) {
                 e.preventDefault();
+                let messageId = Math.floor(Math.random() * 10000);
+                $('.message-temp-id').val(messageId);
+
                 let formData = $(this).serialize();
 
                 $.ajax({
@@ -62,15 +108,19 @@
                                         </div>
                                         <div class="fp__chating_text">
                                             <p>${message}</p>
-                                            <span>Sending...</span>
+                                            <span class="fp-chat-send-status ${messageId}">Sending...</span>
                                         </div>
                                     </div>`;
 
                         $('.fp__chat_body').append(html);
                         $('.fp-send-message').val("");
+                        scrollToRecent();
                     },
                     success: function(response) {
-
+                        if ($('.message-temp-id').val() == response.message_id) {
+                            console.log('.' + messageId);
+                            $('.' + messageId).remove();
+                        }
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         let errorMessage = jqXHR.responseJSON.message;

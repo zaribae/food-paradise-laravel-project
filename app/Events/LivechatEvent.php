@@ -10,16 +10,23 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class LivechatEvent
+class LivechatEvent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $message;
+    public $receiverId;
+    public $senderId;
+    public $profilePict;
     /**
      * Create a new event instance.
      */
-    public function __construct()
+    public function __construct($message, $receiverId, $senderId, $profilePict)
     {
-        //
+        $this->message = $message;
+        $this->receiverId = $receiverId;
+        $this->senderId = $senderId;
+        $this->profilePict = $profilePict;
     }
 
     /**
@@ -30,7 +37,7 @@ class LivechatEvent
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('channel-name'),
+            new PrivateChannel('livechat.' . $this->receiverId),
         ];
     }
 }

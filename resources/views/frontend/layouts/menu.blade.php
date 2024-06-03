@@ -62,8 +62,19 @@
                     <a class="cart_icon"><i class="fas fa-shopping-basket"></i> <span
                             class="cart-count">{{ count(Cart::content()) }}</span></a>
                 </li>
+                @php
+                    $unseenMessage = \App\Models\Livechat::where([
+                        'sender_id' => 1,
+                        'receiver_id' => auth()->user()->id,
+                        'seen' => 0,
+                    ])->count();
+                @endphp
                 <li>
-                    <a class="cart_icon message_icon"><i class="fas fa-comment-alt-dots"></i> <span>7</span></a>
+                    <a class="cart_icon message_icon"><i class="fas fa-comment-alt-dots"></i>
+                        <span class="unseen-message-count">
+                            {{ $unseenMessage > 0 ? 1 : 0 }}
+                        </span>
+                    </a>
                 </li>
                 <li>
                     <a href="{{ route('login') }}"><i class="fas fa-user"></i></a>

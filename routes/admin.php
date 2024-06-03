@@ -80,6 +80,7 @@ Route::prefix('/admin')->as('admin.')->group(function () {
     // Livechat Routes
     Route::get('/livechat', [LivechatController::class, 'index'])->name('livechat.index');
     Route::get('/livechat/get-messages/{senderId}', [LivechatController::class, 'getMessages'])->name('livechat.get-messages');
+    Route::post('/livechat/send-message', [LivechatController::class, 'sendMessages'])->name('livechat.send-messages');
 
     // Setting Route
     Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');

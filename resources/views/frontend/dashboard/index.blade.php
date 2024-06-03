@@ -2,8 +2,8 @@
 
 @section('content')
     <!--=============================
-                                                                                                                                                                                                        BREADCRUMB START
-                                                                                                                                                                                                    ==============================-->
+                                                                                                                                                                                                                                    BREADCRUMB START
+                                                                                                                                                                                                                                ==============================-->
     <section class="fp__breadcrumb" style="background: url({{ asset('frontend/images/counter_bg.jpg') }});">
         <div class="fp__breadcrumb_overlay">
             <div class="container">
@@ -18,13 +18,13 @@
         </div>
     </section>
     <!--=============================
-                                                                                                                                                                                                        BREADCRUMB END
-                                                                                                                                                                                                    ==============================-->
+                                                                                                                                                                                                                                    BREADCRUMB END
+                                                                                                                                                                                                                                ==============================-->
 
 
     <!--=========================
-                                                                                                                                                                                                        DASHBOARD START
-                                                                                                                                                                                                    ==========================-->
+                                                                                                                                                                                                                                    DASHBOARD START
+                                                                                                                                                                                                                                ==========================-->
     <section class="fp__dashboard mt_120 xs_mt_90 mb_100 xs_mb_70">
         <div class="container">
             <div class="fp__dashboard_area">
@@ -58,10 +58,18 @@
                                     aria-controls="v-pills-profile" aria-selected="false"><span><i
                                             class="fas fa-bags-shopping"></i></span> Order</button>
 
-                                <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill"
+                                @php
+                                    $unseenMessage = \App\Models\Livechat::where([
+                                        'sender_id' => 1,
+                                        'receiver_id' => auth()->user()->id,
+                                        'seen' => 0,
+                                    ])->count();
+                                @endphp
+                                <button class="nav-link fp-livechat" id="v-pills-settings-tab" data-bs-toggle="pill"
                                     data-bs-target="#v-pills-settings" type="button" role="tab"
                                     aria-controls="v-pills-settings" aria-selected="false"><span><i
-                                            class="far fa-comment-dots"></i></span> Livechat <b>7</b></button>
+                                            class="far fa-comment-dots"></i></span> Livechat
+                                    <b class="unseen-message-count">{{ $unseenMessage > 0 ? 1 : 0 }}</b></button>
 
                                 <button class="nav-link" id="v-pills-messages-tab2" data-bs-toggle="pill"
                                     data-bs-target="#v-pills-messages2" type="button" role="tab"
@@ -512,8 +520,8 @@
     </div>
     <!-- CART POPUT END -->
     <!--=========================
-                                                                                                                                                                                                        DASHBOARD END
-                                                                                                                                                                                                    ==========================-->
+                                                                                                                                                                                                                                    DASHBOARD END
+                                                                                                                                                                                                                                ==========================-->
 @endsection
 
 @push('scripts')

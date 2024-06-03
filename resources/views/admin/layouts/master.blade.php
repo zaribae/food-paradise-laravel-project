@@ -23,9 +23,10 @@
     <script>
         var pusherKey = "{{ config('settings.pusher_key') }}";
         var pusherCluster = "{{ config('settings.pusher_cluster') }}";
+        var loggedInUser = "{{ auth()->user()->id ?? '' }}";
     </script>
     <!-- /END GA -->
-    @vite(['resources/js/app.js'])
+    @vite(['resources/js/app.js', 'resources/js/admin.js'])
 </head>
 
 <body>

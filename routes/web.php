@@ -38,6 +38,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Livechat Routes
     Route::post('/livechat/send-message', [LivechatController::class, 'sendMessage'])->name('livechat.send-message');
+    Route::get('/livechat/get-messages/{senderId}', [LivechatController::class, 'getMessages'])->name('livechat.get-messages');
 });
 
 // Product Routes

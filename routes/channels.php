@@ -20,3 +20,7 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 Broadcast::channel('order-placed', function () {
     return true;
 });
+
+Broadcast::channel('livechat.{receiverId}', function ($user, $receiverId) {
+    return $user->id == $receiverId;
+});
