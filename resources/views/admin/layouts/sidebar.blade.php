@@ -221,6 +221,9 @@
             <li><a class="nav-link" href="{{ route('admin.slider.index') }}"><i class="far fa-square"></i>
                     <span>Slider</span></a></li>
 
+            <li><a class="nav-link" href="{{ route('admin.daily-offer.index') }}"><i class="far fa-square"></i>
+                    <span>Daily Offer</span></a></li>
+
             <li><a class="nav-link" href="{{ route('admin.benefit.index') }}"><i class="far fa-square"></i>
                     <span>Benefit of Choosing Us</span></a></li>
             <li class="dropdown">
@@ -236,7 +239,8 @@
                 </ul>
             </li>
             <li class="dropdown">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
+                        class="fas fa-columns"></i>
                     <span>Manage Restaurant</span></a>
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="{{ route('admin.product.index') }}">Products</a></li>

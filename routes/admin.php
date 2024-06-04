@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\BenefitController;
 use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\DailyOfferController;
 use App\Http\Controllers\Admin\DeliveryAddressesController;
 use App\Http\Controllers\Admin\DeliveryAreaController;
 use App\Http\Controllers\Admin\LivechatController;
@@ -28,6 +29,11 @@ Route::prefix('/admin')->as('admin.')->group(function () {
 
     // Slider Route
     Route::resource('/slider', SliderController::class);
+
+    // Daily Offer Route
+    Route::patch('/daily-offer-title-update', [DailyOfferController::class, 'updateTitle'])->name('daily-offer.title.update');
+    Route::get('/daily-offer/search-product', [DailyOfferController::class, 'searchProduct'])->name('daily-offer.search-product');
+    Route::resource('/daily-offer', DailyOfferController::class);
 
     // Benefit Route
     Route::patch('/benefit-title-update', [BenefitController::class, 'updateTitle'])->name('benefit.title.update');

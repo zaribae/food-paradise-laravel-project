@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Benefit;
 use App\Models\Coupon;
+use App\Models\DailyOffer;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\SectionTitle;
@@ -21,6 +22,7 @@ class HomeController extends Controller
         $sectionTitles = $this->getSectionTitles();
         $sliders = Slider::where('status', 1)->get();
         $benefits = Benefit::where('status', 1)->get();
+        $dailyOffers = DailyOffer::with('product')->where('status', 1)->take(6)->get();
 
         $productCategories = ProductCategory::where(['show_at_home' => 1, 'status' => 1])->get();
 
@@ -30,6 +32,7 @@ class HomeController extends Controller
                 'sliders',
                 'sectionTitles',
                 'benefits',
+                'dailyOffers',
                 'productCategories'
             )
         );
@@ -37,7 +40,14 @@ class HomeController extends Controller
 
     function getSectionTitles(): SupportCollection
     {
-        $keys = ['benefit_top_title', 'benefit_main_title', 'benefit_sub_title'];
+        $keys = [
+            'benefit_top_title',
+            'benefit_main_title',
+            'benefit_sub_title',
+            'daily_offer_top_title',
+            'daily_offer_main_title',
+            'daily_offer_sub_title'
+        ];
 
         return SectionTitle::whereIn('key', $keys)->pluck('value', 'key');
     }

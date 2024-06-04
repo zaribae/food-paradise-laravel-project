@@ -63,7 +63,7 @@
                             class="cart-count">{{ count(Cart::content()) }}</span></a>
                 </li>
                 @php
-                    $unseenMessage = \App\Models\Livechat::where([
+                    @$unseenMessage = \App\Models\Livechat::where([
                         'sender_id' => 1,
                         'receiver_id' => auth()->user()->id,
                         'seen' => 0,
@@ -72,7 +72,7 @@
                 <li>
                     <a class="cart_icon message_icon"><i class="fas fa-comment-alt-dots"></i>
                         <span class="unseen-message-count">
-                            {{ $unseenMessage > 0 ? 1 : 0 }}
+                            {{ @$unseenMessage > 0 ? 1 : 0 }}
                         </span>
                     </a>
                 </li>
