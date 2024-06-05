@@ -227,6 +227,7 @@
                     <li><a class="nav-link" href="{{ route('admin.daily-offer.index') }}">Daily Offer</a></li>
                     <li><a class="nav-link" href="{{ route('admin.menu-slider.index') }}">Menu Slider</a></li>
                     <li><a class="nav-link" href="{{ route('admin.chef.index') }}">Chef</a></li>
+                    <li><a class="nav-link" href="{{ route('admin.app-download') }}">App Download</a></li>
                 </ul>
             </li>
 

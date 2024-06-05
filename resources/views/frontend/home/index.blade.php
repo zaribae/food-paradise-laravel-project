@@ -26,7 +26,7 @@
 
 
     {{-- App Download  --}}
-    {{-- @include('frontend.home.components.app-download') --}}
+    @include('frontend.home.components.app-download')
 
 
     {{-- Testimonial --}}

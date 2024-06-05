@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ChefCreateRequest extends FormRequest
+class AppDownloadSectionCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,15 +22,12 @@ class ChefCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'image' => ['required', 'image', 'max:2048'],
-            'name' => ['required', 'string', 'max:255'],
-            'title' => ['required', 'string', 'max:255'],
-            'fb' => ['nullable', 'url'],
-            'in' => ['nullable', 'url'],
-            'x' => ['nullable', 'url'],
-            'ig' => ['nullable', 'url'],
-            'status' => ['required', 'boolean'],
-            'show_at_home' => ['required', 'boolean']
+            'image' => ['nullable', 'image', 'max:2048'],
+            'background' => ['nullable', 'image', 'max:2048'],
+            'title' => ['required', 'max:255'],
+            'short_description' => ['required', 'max:500'],
+            'playstore_link' => ['nullable', 'url'],
+            'appstore_link' => ['nullable', 'url'],
         ];
     }
 }

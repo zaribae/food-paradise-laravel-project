@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\AppDownloadSection;
 use App\Models\Benefit;
 use App\Models\Chef;
 use App\Models\Coupon;
@@ -27,6 +28,7 @@ class HomeController extends Controller
         $dailyOffers = DailyOffer::with('product')->where('status', 1)->take(6)->get();
         $menuSlider = MenuSlider::where('status', 1)->take(6)->get();
         $chef = Chef::where(['status' => 1, 'show_at_home' => 1])->get();
+        $appDownloadSection = AppDownloadSection::first();
 
         $productCategories = ProductCategory::where(['show_at_home' => 1, 'status' => 1])->get();
 
@@ -39,6 +41,7 @@ class HomeController extends Controller
                 'dailyOffers',
                 'menuSlider',
                 'chef',
+                'appDownloadSection',
                 'productCategories'
             )
         );

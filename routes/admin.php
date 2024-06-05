@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AppDownloadController;
 use App\Http\Controllers\Admin\BenefitController;
 use App\Http\Controllers\Admin\ChefController;
 use App\Http\Controllers\Admin\CouponController;
@@ -43,6 +44,10 @@ Route::prefix('/admin')->as('admin.')->group(function () {
     // Chef Section Route
     Route::patch('/chef-title-update', [ChefController::class, 'updateTitle'])->name('chef.title.update');
     Route::resource('/chef', ChefController::class);
+
+    // App Download Section
+    Route::get('/app-download', [AppDownloadController::class, 'index'])->name('app-download');
+    Route::post('/app-download', [AppDownloadController::class, 'store'])->name('app-download.store');
 
     // Benefit Route
     Route::patch('/benefit-title-update', [BenefitController::class, 'updateTitle'])->name('benefit.title.update');
