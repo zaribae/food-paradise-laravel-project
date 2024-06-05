@@ -218,14 +218,17 @@
             </li>
             <li class="menu-header">Starter</li>
 
-            <li><a class="nav-link" href="{{ route('admin.slider.index') }}"><i class="far fa-square"></i>
-                    <span>Slider</span></a></li>
+            <li class="dropdown">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
+                    <span>Homepage Content</span></a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="{{ route('admin.slider.index') }}">Slider</a></li>
+                    <li><a class="nav-link" href="{{ route('admin.benefit.index') }}">Benefit of Choosing Us</a></li>
+                    <li><a class="nav-link" href="{{ route('admin.daily-offer.index') }}">Daily Offer</a></li>
+                    <li><a class="nav-link" href="{{ route('admin.menu-slider.index') }}">Menu Slider</a></li>
+                </ul>
+            </li>
 
-            <li><a class="nav-link" href="{{ route('admin.daily-offer.index') }}"><i class="far fa-square"></i>
-                    <span>Daily Offer</span></a></li>
-
-            <li><a class="nav-link" href="{{ route('admin.benefit.index') }}"><i class="far fa-square"></i>
-                    <span>Benefit of Choosing Us</span></a></li>
             <li class="dropdown">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
                     <span>Orders</span></a>

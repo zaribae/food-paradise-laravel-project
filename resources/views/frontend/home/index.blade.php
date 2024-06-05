@@ -18,7 +18,7 @@
 
 
     {{-- Menu Picture  --}}
-    {{-- @include('frontend.home.components.menu-picture') --}}
+    @include('frontend.home.components.menu-picture')
 
 
     {{-- Team Members  --}}

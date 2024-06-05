@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Benefit;
 use App\Models\Coupon;
 use App\Models\DailyOffer;
+use App\Models\MenuSlider;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\SectionTitle;
@@ -23,6 +24,7 @@ class HomeController extends Controller
         $sliders = Slider::where('status', 1)->get();
         $benefits = Benefit::where('status', 1)->get();
         $dailyOffers = DailyOffer::with('product')->where('status', 1)->take(6)->get();
+        $menuSlider = MenuSlider::where('status', 1)->take(6)->get();
 
         $productCategories = ProductCategory::where(['show_at_home' => 1, 'status' => 1])->get();
 
@@ -33,6 +35,7 @@ class HomeController extends Controller
                 'sectionTitles',
                 'benefits',
                 'dailyOffers',
+                'menuSlider',
                 'productCategories'
             )
         );

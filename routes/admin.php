@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\DailyOfferController;
 use App\Http\Controllers\Admin\DeliveryAddressesController;
 use App\Http\Controllers\Admin\DeliveryAreaController;
 use App\Http\Controllers\Admin\LivechatController;
+use App\Http\Controllers\Admin\MenuSliderController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PaymentGatewaySettingController;
 use App\Http\Controllers\Admin\ProductCategoryController;
@@ -34,6 +35,9 @@ Route::prefix('/admin')->as('admin.')->group(function () {
     Route::patch('/daily-offer-title-update', [DailyOfferController::class, 'updateTitle'])->name('daily-offer.title.update');
     Route::get('/daily-offer/search-product', [DailyOfferController::class, 'searchProduct'])->name('daily-offer.search-product');
     Route::resource('/daily-offer', DailyOfferController::class);
+
+    // Menu Slider Route
+    Route::resource('/menu-slider', MenuSliderController::class);
 
     // Benefit Route
     Route::patch('/benefit-title-update', [BenefitController::class, 'updateTitle'])->name('benefit.title.update');
