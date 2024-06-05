@@ -105,7 +105,7 @@ class MenuSliderController extends Controller
 
             return response([
                 'status' => 'success',
-                'message' => 'Slider Deleted Successfully!'
+                'message' => 'Menu Slider Deleted Successfully!'
             ]);
         } catch (\Exception $e) {
             return response([

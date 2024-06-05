@@ -22,7 +22,7 @@
 
 
     {{-- Team Members  --}}
-    {{-- @include('frontend.home.components.team-members') --}}
+    @include('frontend.home.components.team-members')
 
 
     {{-- App Download  --}}

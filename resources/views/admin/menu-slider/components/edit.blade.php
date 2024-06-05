@@ -3,11 +3,11 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Daily Offer</h1>
+            <h1>Menu Slider</h1>
         </div>
         <div class="card card-primary col-lg-9">
             <div class="card-header">
-                <h4>Create New Daily Offer</h4>
+                <h4>Edit Menu Slider</h4>
             </div>
             <div class="card-body">
                 <form action="{{ route('admin.menu-slider.update', $menuSlider->id) }}" method="POST"

@@ -41,6 +41,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/livechat/get-messages/{senderId}', [LivechatController::class, 'getMessages'])->name('livechat.get-messages');
 });
 
+// Chefs Routes
+Route::get('/chefs', [HomeController::class, 'chefs'])->name('chefs.index');
+
 // Product Routes
 Route::get('/product/{slug}', [HomeController::class, 'showProduct'])->name('product.show');
 

@@ -226,6 +226,7 @@
                     <li><a class="nav-link" href="{{ route('admin.benefit.index') }}">Benefit of Choosing Us</a></li>
                     <li><a class="nav-link" href="{{ route('admin.daily-offer.index') }}">Daily Offer</a></li>
                     <li><a class="nav-link" href="{{ route('admin.menu-slider.index') }}">Menu Slider</a></li>
+                    <li><a class="nav-link" href="{{ route('admin.chef.index') }}">Chef</a></li>
                 </ul>
             </li>
 

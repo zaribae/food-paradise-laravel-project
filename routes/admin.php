@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\BenefitController;
+use App\Http\Controllers\Admin\ChefController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\DailyOfferController;
 use App\Http\Controllers\Admin\DeliveryAddressesController;
@@ -38,6 +39,10 @@ Route::prefix('/admin')->as('admin.')->group(function () {
 
     // Menu Slider Route
     Route::resource('/menu-slider', MenuSliderController::class);
+
+    // Chef Section Route
+    Route::patch('/chef-title-update', [ChefController::class, 'updateTitle'])->name('chef.title.update');
+    Route::resource('/chef', ChefController::class);
 
     // Benefit Route
     Route::patch('/benefit-title-update', [BenefitController::class, 'updateTitle'])->name('benefit.title.update');

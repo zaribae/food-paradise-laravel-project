@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Benefit;
+use App\Models\Chef;
 use App\Models\Coupon;
 use App\Models\DailyOffer;
 use App\Models\MenuSlider;
@@ -25,6 +26,7 @@ class HomeController extends Controller
         $benefits = Benefit::where('status', 1)->get();
         $dailyOffers = DailyOffer::with('product')->where('status', 1)->take(6)->get();
         $menuSlider = MenuSlider::where('status', 1)->take(6)->get();
+        $chef = Chef::where(['status' => 1, 'show_at_home' => 1])->get();
 
         $productCategories = ProductCategory::where(['show_at_home' => 1, 'status' => 1])->get();
 
@@ -36,6 +38,7 @@ class HomeController extends Controller
                 'benefits',
                 'dailyOffers',
                 'menuSlider',
+                'chef',
                 'productCategories'
             )
         );
@@ -49,10 +52,19 @@ class HomeController extends Controller
             'benefit_sub_title',
             'daily_offer_top_title',
             'daily_offer_main_title',
-            'daily_offer_sub_title'
+            'daily_offer_sub_title',
+            'chef_top_title',
+            'chef_main_title',
+            'chef_sub_title'
         ];
 
         return SectionTitle::whereIn('key', $keys)->pluck('value', 'key');
+    }
+
+    function chefs(): View
+    {
+        $chefs = Chef::where('status', 1)->paginate(4);
+        return view('frontend.pages.chef-view', compact('chefs'));
     }
 
     function showProduct(string $slug): View
