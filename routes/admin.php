@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\ProductSizeController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\TestimonialController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/admin')->as('admin.')->group(function () {
@@ -45,9 +46,13 @@ Route::prefix('/admin')->as('admin.')->group(function () {
     Route::patch('/chef-title-update', [ChefController::class, 'updateTitle'])->name('chef.title.update');
     Route::resource('/chef', ChefController::class);
 
-    // App Download Section
+    // App Download Section Route
     Route::get('/app-download', [AppDownloadController::class, 'index'])->name('app-download');
     Route::post('/app-download', [AppDownloadController::class, 'store'])->name('app-download.store');
+
+    // Testimonials Section Route
+    Route::patch('/testimonial-title-update', [TestimonialController::class, 'updateTitle'])->name('testimonials.title.update');
+    Route::resource('/testimonials', TestimonialController::class);
 
     // Benefit Route
     Route::patch('/benefit-title-update', [BenefitController::class, 'updateTitle'])->name('benefit.title.update');

@@ -13,6 +13,7 @@ use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\SectionTitle;
 use App\Models\Slider;
+use App\Models\Testimonial;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -28,6 +29,7 @@ class HomeController extends Controller
         $dailyOffers = DailyOffer::with('product')->where('status', 1)->take(6)->get();
         $menuSlider = MenuSlider::where('status', 1)->take(6)->get();
         $chef = Chef::where(['status' => 1, 'show_at_home' => 1])->get();
+        $testimonial = Testimonial::where(['status' => 1, 'show_at_home' => 1])->take(5)->get();
         $appDownloadSection = AppDownloadSection::first();
 
         $productCategories = ProductCategory::where(['show_at_home' => 1, 'status' => 1])->get();
@@ -41,6 +43,7 @@ class HomeController extends Controller
                 'dailyOffers',
                 'menuSlider',
                 'chef',
+                'testimonial',
                 'appDownloadSection',
                 'productCategories'
             )
@@ -58,7 +61,10 @@ class HomeController extends Controller
             'daily_offer_sub_title',
             'chef_top_title',
             'chef_main_title',
-            'chef_sub_title'
+            'chef_sub_title',
+            'testimonial_top_title',
+            'testimonial_main_title',
+            'testimonial_sub_title'
         ];
 
         return SectionTitle::whereIn('key', $keys)->pluck('value', 'key');
@@ -68,6 +74,12 @@ class HomeController extends Controller
     {
         $chefs = Chef::where('status', 1)->paginate(4);
         return view('frontend.pages.chef-view', compact('chefs'));
+    }
+
+    function testimonials(): View
+    {
+        $testimonials = Testimonial::where('status', 1)->paginate(3);
+        return view('frontend.pages.testimonials-page', compact('testimonials'));
     }
 
     function showProduct(string $slug): View

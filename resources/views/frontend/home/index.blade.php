@@ -30,7 +30,7 @@
 
 
     {{-- Testimonial --}}
-    {{-- @include('frontend.home.components.testimonials') --}}
+    @include('frontend.home.components.testimonials')
 
 
     {{-- Counter --}}

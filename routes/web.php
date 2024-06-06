@@ -44,6 +44,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 // Chefs Routes
 Route::get('/chefs', [HomeController::class, 'chefs'])->name('chefs.index');
 
+//Testimonials Route
+Route::get('/testimonials', [HomeController::class, 'testimonials'])->name('testimonials.index');
+
 // Product Routes
 Route::get('/product/{slug}', [HomeController::class, 'showProduct'])->name('product.show');
 
