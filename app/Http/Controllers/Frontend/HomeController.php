@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AppDownloadSection;
 use App\Models\Benefit;
 use App\Models\Chef;
+use App\Models\Counter;
 use App\Models\Coupon;
 use App\Models\DailyOffer;
 use App\Models\MenuSlider;
@@ -31,6 +32,7 @@ class HomeController extends Controller
         $chef = Chef::where(['status' => 1, 'show_at_home' => 1])->get();
         $testimonial = Testimonial::where(['status' => 1, 'show_at_home' => 1])->take(5)->get();
         $appDownloadSection = AppDownloadSection::first();
+        $counter = Counter::first();
 
         $productCategories = ProductCategory::where(['show_at_home' => 1, 'status' => 1])->get();
 
@@ -45,6 +47,7 @@ class HomeController extends Controller
                 'chef',
                 'testimonial',
                 'appDownloadSection',
+                'counter',
                 'productCategories'
             )
         );

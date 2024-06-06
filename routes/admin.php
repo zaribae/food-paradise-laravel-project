@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AppDownloadController;
 use App\Http\Controllers\Admin\BenefitController;
 use App\Http\Controllers\Admin\ChefController;
+use App\Http\Controllers\Admin\CounterController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\DailyOfferController;
 use App\Http\Controllers\Admin\DeliveryAddressesController;
@@ -53,6 +54,10 @@ Route::prefix('/admin')->as('admin.')->group(function () {
     // Testimonials Section Route
     Route::patch('/testimonial-title-update', [TestimonialController::class, 'updateTitle'])->name('testimonials.title.update');
     Route::resource('/testimonials', TestimonialController::class);
+
+    // Counter Route
+    Route::get('/counter', [CounterController::class, 'index'])->name('counter.index');
+    Route::patch('/counter', [CounterController::class, 'updateCounter'])->name('counter.update');
 
     // Benefit Route
     Route::patch('/benefit-title-update', [BenefitController::class, 'updateTitle'])->name('benefit.title.update');

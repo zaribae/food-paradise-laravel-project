@@ -229,6 +229,7 @@
                     <li><a class="nav-link" href="{{ route('admin.chef.index') }}">Chef</a></li>
                     <li><a class="nav-link" href="{{ route('admin.app-download') }}">App Download</a></li>
                     <li><a class="nav-link" href="{{ route('admin.testimonials.index') }}">Testimonials</a></li>
+                    <li><a class="nav-link" href="{{ route('admin.counter.index') }}">Counter</a></li>
                 </ul>
             </li>
 

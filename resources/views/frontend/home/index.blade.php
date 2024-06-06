@@ -34,7 +34,8 @@
 
 
     {{-- Counter --}}
-    {{-- @include('frontend.home.components.counter') --}}
+    @include('frontend.home.components.counter')
+
 
     {{-- Blog --}}
     {{-- @include('frontend.home.components.blog') --}}
