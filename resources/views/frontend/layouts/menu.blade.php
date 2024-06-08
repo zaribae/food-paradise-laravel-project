@@ -25,7 +25,7 @@
                     <a class="nav-link" href="#">pages <i class="far fa-angle-down"></i></a>
                     <ul class="droap_menu">
                         <li><a href="menu_details.html">menu details</a></li>
-                        <li><a href="blog_details.html">blog details</a></li>
+                        <li><a href="{{ route('blogs') }}">blog details</a></li>
                         <li><a href="cart_view.html">cart view</a></li>
                         <li><a href="check_out.html">checkout</a></li>
                         <li><a href="payment.html">payment</a></li>
@@ -41,7 +41,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="blogs.html">blog</a>
+                    <a class="nav-link" href="{{ route('blogs') }}">blog</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="contact.html">contact</a>

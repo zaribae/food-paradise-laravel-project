@@ -47,6 +47,11 @@ Route::get('/chefs', [HomeController::class, 'chefs'])->name('chefs.index');
 //Testimonials Route
 Route::get('/testimonials', [HomeController::class, 'testimonials'])->name('testimonials.index');
 
+// Blogs Route
+Route::get('/blogs', [HomeController::class, 'blog'])->name('blogs');
+Route::get('/blogs/{slug}', [HomeController::class, 'blogDetails'])->name('blogs.view');
+Route::post('/blogs/comment/{blogId}', [HomeController::class, 'blogCommentStore'])->name('blogs.comment')->middleware(['auth', 'verified']);
+
 // Product Routes
 Route::get('/product/{slug}', [HomeController::class, 'showProduct'])->name('product.show');
 

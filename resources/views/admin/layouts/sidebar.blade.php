@@ -270,6 +270,16 @@
         <li><a class="nav-link" href="{{ route('admin.livechat.index') }}"><i class="far fa-square"></i>
                 <span>Livechat</span></a></li>
 
+        <li class="dropdown">
+            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
+                <span>Blog</span></a>
+            <ul class="dropdown-menu">
+                <li><a class="nav-link" href="{{ route('admin.blog-category.index') }}">Categories</a></li>
+                <li><a class="nav-link" href="{{ route('admin.blogs.index') }}">All Blogs</a>
+                <li><a class="nav-link" href="{{ route('admin.blog.comments.index') }}">Comments</a>
+                </li>
+            </ul>
+        </li>
         <li><a class="nav-link" href="{{ route('admin.setting.index') }}"><i class="far fa-square"></i>
                 <span>Settings</span></a></li>
 

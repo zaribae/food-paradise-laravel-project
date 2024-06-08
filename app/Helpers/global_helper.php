@@ -142,3 +142,14 @@ if (!function_exists('discountInPercent')) {
         return round($result);
     }
 }
+
+
+/**
+ * truncate long string to readable string
+ */
+if (!function_exists('truncateString')) {
+    function truncateString(string $string, int $limit = 50)
+    {
+        return Str::limit($string, $limit, '...');
+    }
+}

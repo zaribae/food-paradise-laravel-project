@@ -51,33 +51,6 @@
                 <div class="fp__pagination mt_60">
                     <div class="row">
                         <div class="col-12">
-                            {{-- <nav aria-label="...">
-                                <ul class="pagination">
-                                    <li class="page-item">
-                                        <a class="page-link" href="#"><i class="fas fa-long-arrow-alt-left"></i></a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#"><i class="fas fa-long-arrow-alt-right"></i></a>
-                                    </li>
-                                </ul>
-                            </nav> --}}
-                            {{-- <nav>
-                                <ul class="pagination">
-                                    <li class="page-item disabled" aria-disabled="true" aria-label="« Previous">
-                                        <span class="page-link" aria-hidden="true">‹</span>
-                                    </li>
-                                    <li class="page-item active" aria-current="page"><span class="page-link">1</span></li>
-                                    <li class="page-item"><a class="page-link"
-                                            href="http://localhost:8000/chefs?page=2">2</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="http://localhost:8000/chefs?page=2" rel="next"
-                                            aria-label="Next »">›</a>
-                                    </li>
-                                </ul>
-                            </nav> --}}
                             {{ $chefs->links() }}
                         </div>
                     </div>

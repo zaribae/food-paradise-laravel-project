@@ -38,5 +38,5 @@
 
 
     {{-- Blog --}}
-    {{-- @include('frontend.home.components.blog') --}}
+    @include('frontend.home.components.blog')
 @endsection

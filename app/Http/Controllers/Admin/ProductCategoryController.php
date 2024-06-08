@@ -73,7 +73,11 @@ class ProductCategoryController extends Controller
     {
         $productCategory = ProductCategory::findOrFail($id);
 
-        $productCategory->update($request->validated());
+        $productCategory->name = $request->name;
+        $productCategory->slug = Str::slug($request->name);
+        $productCategory->status = $request->status;
+        $productCategory->show_at_home = $request->show_at_home;
+        $productCategory->save();
 
         toastr()->success('Product Category content Updated Successfully!');
 

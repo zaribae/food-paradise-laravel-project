@@ -3,6 +3,8 @@
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AppDownloadController;
 use App\Http\Controllers\Admin\BenefitController;
+use App\Http\Controllers\Admin\BlogCategoryController;
+use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\ChefController;
 use App\Http\Controllers\Admin\CounterController;
 use App\Http\Controllers\Admin\CouponController;
@@ -111,6 +113,15 @@ Route::prefix('/admin')->as('admin.')->group(function () {
     Route::get('/livechat', [LivechatController::class, 'index'])->name('livechat.index');
     Route::get('/livechat/get-messages/{senderId}', [LivechatController::class, 'getMessages'])->name('livechat.get-messages');
     Route::post('/livechat/send-message', [LivechatController::class, 'sendMessages'])->name('livechat.send-messages');
+
+    // Blog Category Routes
+    Route::resource('/blog-category', BlogCategoryController::class);
+
+    // Blog Category Routes
+    Route::get('/blogs/comments', [BlogController::class, 'blogComment'])->name('blog.comments.index');
+    Route::get('/blogs/comments/{commentId}', [BlogController::class, 'commentStatusUpdate'])->name('blog.comments-status.update');
+    Route::delete('/blogs/comments/{commentId}', [BlogController::class, 'commentDelete'])->name('blog.comments.destroy');
+    Route::resource('/blogs', BlogController::class);
 
     // Setting Route
     Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
