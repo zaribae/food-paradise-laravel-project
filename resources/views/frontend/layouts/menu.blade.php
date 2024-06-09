@@ -36,8 +36,8 @@
                         <li><a href="sign_in.html">sign in</a></li>
                         <li><a href="sign_up.html">sign up</a></li>
                         <li><a href="forgot_password.html">forgot password</a></li>
-                        <li><a href="privacy_policy.html">privacy policy</a></li>
-                        <li><a href="terms_condition.html">terms and condition</a></li>
+                        <li><a href="{{ route('privacy-policy.index') }}">privacy policy</a></li>
+                        <li><a href="{{ route('terms-condition.index') }}">terms and condition</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">

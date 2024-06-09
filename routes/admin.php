@@ -10,12 +10,12 @@ use App\Http\Controllers\Admin\ChefController;
 use App\Http\Controllers\Admin\CounterController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\DailyOfferController;
-use App\Http\Controllers\Admin\DeliveryAddressesController;
 use App\Http\Controllers\Admin\DeliveryAreaController;
 use App\Http\Controllers\Admin\LivechatController;
 use App\Http\Controllers\Admin\MenuSliderController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PaymentGatewaySettingController;
+use App\Http\Controllers\Admin\PrivacyPolicyController;
 use App\Http\Controllers\Admin\ProductCategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductGalleryController;
@@ -24,7 +24,9 @@ use App\Http\Controllers\Admin\ProductSizeController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\TermsConditionController;
 use App\Http\Controllers\Admin\TestimonialController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('/admin')->as('admin.')->group(function () {
@@ -127,6 +129,14 @@ Route::prefix('/admin')->as('admin.')->group(function () {
     // About Routes
     Route::get('/about', [AboutController::class, 'index'])->name('about.index');
     Route::patch('/about', [AboutController::class, 'update'])->name('about.update');
+
+    // Privacy & Policy Routes
+    Route::get('/privacy-policy', [PrivacyPolicyController::class, 'index'])->name('privacy-policy.index');
+    Route::patch('/privacy-policy', [PrivacyPolicyController::class, 'update'])->name('privacy-policy.update');
+
+    // Terms & Conditions Routes
+    Route::get('/terms-condition', [TermsConditionController::class, 'index'])->name('terms-condition.index');
+    Route::patch('/terms-condition', [TermsConditionController::class, 'update'])->name('terms-condition.update');
 
     // Setting Route
     Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');

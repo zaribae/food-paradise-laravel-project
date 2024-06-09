@@ -14,10 +14,12 @@ use App\Models\Counter;
 use App\Models\Coupon;
 use App\Models\DailyOffer;
 use App\Models\MenuSlider;
+use App\Models\PrivacyPolicy;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\SectionTitle;
 use App\Models\Slider;
+use App\Models\TermsCondition;
 use App\Models\Testimonial;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
@@ -83,6 +85,18 @@ class HomeController extends Controller
         $testimonial = Testimonial::where(['status' => 1, 'show_at_home' => 1])->take(5)->get();
         $about = About::first();
         return view('frontend.pages.about', compact('about', 'sectionTitles', 'benefits', 'chef', 'counter', 'testimonial'));
+    }
+
+    function privacyPolicy(): View
+    {
+        $privacyPolicy = PrivacyPolicy::first();
+        return view('frontend.pages.privacy-policy', compact('privacyPolicy'));
+    }
+
+    function termsCondition(): View
+    {
+        $termsCondition = TermsCondition::first();
+        return view('frontend.pages.terms-condition', compact('termsCondition'));
     }
 
     function getSectionTitles(): SupportCollection

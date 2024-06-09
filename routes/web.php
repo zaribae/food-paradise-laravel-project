@@ -26,7 +26,14 @@ use Illuminate\Support\Facades\Route;
 // Home Route
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+// About Us Route
 Route::get('/about', [HomeController::class, 'about'])->name('about');
+
+// Privacy & Policy Route
+Route::get('/privacy-policy', [HomeController::class, 'privacyPolicy'])->name('privacy-policy.index');
+
+// Terms & Condition Route
+Route::get('/terms-condition', [HomeController::class, 'termsCondition'])->name('terms-condition.index');
 
 // User Routes
 Route::middleware(['auth', 'verified'])->group(function () {
