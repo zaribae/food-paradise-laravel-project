@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\BenefitController;
 use App\Http\Controllers\Admin\BlogCategoryController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\ChefController;
+use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\CounterController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\DailyOfferController;
@@ -138,10 +139,17 @@ Route::prefix('/admin')->as('admin.')->group(function () {
     Route::get('/terms-condition', [TermsConditionController::class, 'index'])->name('terms-condition.index');
     Route::patch('/terms-condition', [TermsConditionController::class, 'update'])->name('terms-condition.update');
 
+    // Terms & Conditions Routes
+    Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+    Route::patch('/contact', [ContactController::class, 'update'])->name('contact.update');
+
     // Setting Route
     Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
     Route::patch('/setting/general-setting', [SettingController::class, 'updateGeneralSetting'])->name('setting.general-setting.update');
 
     // Pusher Setting Route
     Route::patch('/pusher-setting', [SettingController::class, 'updatePusherSetting'])->name('pusher-setting.update');
+
+    // Mail Setting Route
+    Route::patch('/mail-setting', [SettingController::class, 'updateMailSetting'])->name('mail-setting.update');
 });

@@ -29,6 +29,10 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 // About Us Route
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 
+// Contact Route
+Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+Route::post('/contact', [HomeController::class, 'sendContactMessage'])->name('contact.send-message');
+
 // Privacy & Policy Route
 Route::get('/privacy-policy', [HomeController::class, 'privacyPolicy'])->name('privacy-policy.index');
 

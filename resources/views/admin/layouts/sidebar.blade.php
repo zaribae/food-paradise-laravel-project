@@ -287,11 +287,11 @@
                 <li><a class="nav-link" href="{{ route('admin.about.index') }}">About</a></li>
                 <li><a class="nav-link" href="{{ route('admin.privacy-policy.index') }}">Privacy & Policy</a></li>
                 <li><a class="nav-link" href="{{ route('admin.terms-condition.index') }}">Terms & Condition</a></li>
+                <li><a class="nav-link" href="{{ route('admin.contact.index') }}">Contacts</a></li>
             </ul>
         </li>
         <li><a class="nav-link" href="{{ route('admin.setting.index') }}"><i class="far fa-square"></i>
                 <span>Settings</span></a></li>
-
         </ul>
     </aside>
 </div>

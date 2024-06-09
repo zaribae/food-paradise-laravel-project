@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ContactMail;
 use App\Models\About;
 use App\Models\AppDownloadSection;
 use App\Models\Benefit;
@@ -10,6 +11,7 @@ use App\Models\Blog;
 use App\Models\BlogCategory;
 use App\Models\BlogComment;
 use App\Models\Chef;
+use App\Models\Contact;
 use App\Models\Counter;
 use App\Models\Coupon;
 use App\Models\DailyOffer;
@@ -26,6 +28,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Collection as SupportCollection;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 
 class HomeController extends Controller
@@ -85,6 +88,29 @@ class HomeController extends Controller
         $testimonial = Testimonial::where(['status' => 1, 'show_at_home' => 1])->take(5)->get();
         $about = About::first();
         return view('frontend.pages.about', compact('about', 'sectionTitles', 'benefits', 'chef', 'counter', 'testimonial'));
+    }
+
+    function contact(): View
+    {
+        $contact = Contact::first();
+        return view('frontend.pages.contact', compact('contact'));
+    }
+
+    function sendContactMessage(Request $request): Response
+    {
+        $request->validate([
+            'name' => ['required', 'max:255'],
+            'email' => ['required', 'email', 'max:255'],
+            'subject' => ['required', 'max:255'],
+            'message' => ['required', 'max:1000'],
+        ]);
+
+        Mail::send(new ContactMail($request->name, $request->email, $request->subject, $request->message));
+
+        return response([
+            'status' => 'success',
+            'message' => 'Email sent Successfully.'
+        ]);
     }
 
     function privacyPolicy(): View
