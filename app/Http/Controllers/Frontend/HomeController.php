@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\About;
 use App\Models\AppDownloadSection;
 use App\Models\Benefit;
 use App\Models\Blog;
@@ -38,7 +39,9 @@ class HomeController extends Controller
         $testimonial = Testimonial::where(['status' => 1, 'show_at_home' => 1])->take(5)->get();
         $appDownloadSection = AppDownloadSection::first();
         $counter = Counter::first();
-        $blogs = Blog::where(['status' => 1, 'show_at_home' => 1])->take(6)->get();
+        $blogs = Blog::withCount(['comments' => function ($query) {
+            $query->where('status', 1);
+        }])->where(['status' => 1, 'show_at_home' => 1])->latest()->take(6)->get();
 
         $productCategories = ProductCategory::where(['show_at_home' => 1, 'status' => 1])->get();
 
@@ -58,6 +61,28 @@ class HomeController extends Controller
                 'productCategories'
             )
         );
+    }
+
+    function about(): View
+    {
+        $keys = [
+            'benefit_top_title',
+            'benefit_main_title',
+            'benefit_sub_title',
+            'chef_top_title',
+            'chef_main_title',
+            'chef_sub_title',
+            'testimonial_top_title',
+            'testimonial_main_title',
+            'testimonial_sub_title'
+        ];
+        $sectionTitles = SectionTitle::whereIn('key', $keys)->pluck('value', 'key');;
+        $benefits = Benefit::where('status', 1)->get();
+        $chef = Chef::where(['status' => 1, 'show_at_home' => 1])->get();
+        $counter = Counter::first();
+        $testimonial = Testimonial::where(['status' => 1, 'show_at_home' => 1])->take(5)->get();
+        $about = About::first();
+        return view('frontend.pages.about', compact('about', 'sectionTitles', 'benefits', 'chef', 'counter', 'testimonial'));
     }
 
     function getSectionTitles(): SupportCollection

@@ -26,6 +26,8 @@ use Illuminate\Support\Facades\Route;
 // Home Route
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+Route::get('/about', [HomeController::class, 'about'])->name('about');
+
 // User Routes
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

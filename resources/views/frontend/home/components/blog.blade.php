@@ -27,11 +27,11 @@
                                 <ul class="d-flex flex-wrap mt_15">
                                     <li><i class="fas fa-user"></i>{{ @$blog->user->name }}</li>
                                     <li><i class="fas fa-calendar-alt"></i>
-                                        {{ date('d M Y', strtotime($blog->created_at)) }}</li>
-                                    <li><i class="fas fa-comments"></i> 25 comment</li>
+                                        {{ date('d M Y', strtotime(@$blog->created_at)) }}</li>
+                                    <li><i class="fas fa-comments"></i> {{ @$blog->comments_count }} comment</li>
                                 </ul>
                                 <a class="title"
-                                    href="{{ route('blogs.view', $blog->slug) }}">{{ truncateString(@$blog->title) }}</a>
+                                    href="{{ route('blogs.view', @$blog->slug) }}">{{ truncateString(@$blog->title) }}</a>
                             </div>
                         </div>
                     </div>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AppDownloadController;
 use App\Http\Controllers\Admin\BenefitController;
@@ -117,11 +118,15 @@ Route::prefix('/admin')->as('admin.')->group(function () {
     // Blog Category Routes
     Route::resource('/blog-category', BlogCategoryController::class);
 
-    // Blog Category Routes
+    // Blog Routes
     Route::get('/blogs/comments', [BlogController::class, 'blogComment'])->name('blog.comments.index');
     Route::get('/blogs/comments/{commentId}', [BlogController::class, 'commentStatusUpdate'])->name('blog.comments-status.update');
     Route::delete('/blogs/comments/{commentId}', [BlogController::class, 'commentDelete'])->name('blog.comments.destroy');
     Route::resource('/blogs', BlogController::class);
+
+    // About Routes
+    Route::get('/about', [AboutController::class, 'index'])->name('about.index');
+    Route::patch('/about', [AboutController::class, 'update'])->name('about.update');
 
     // Setting Route
     Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');

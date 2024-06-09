@@ -153,3 +153,24 @@ if (!function_exists('truncateString')) {
         return Str::limit($string, $limit, '...');
     }
 }
+
+
+/**
+ * get thumbnail image from link
+ */
+if (!function_exists('getThumbnail')) {
+    function getThumbnail($link, $size = 'medium')
+    {
+        $links = explode('.be/', $link);
+        $videoId = $links[1];
+
+        $finalSize = match ($size) {
+            'low' => 'sddefault',
+            'medium' => 'mqdefault',
+            'high' => 'hqdefault',
+            'max' => 'maxresdefault',
+        };
+
+        return "https://img.youtube.com/vi/$videoId/$finalSize.jpeg";
+    }
+}
