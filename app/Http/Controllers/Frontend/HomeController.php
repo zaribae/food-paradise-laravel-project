@@ -22,6 +22,7 @@ use App\Models\ProductCategory;
 use App\Models\Reservation;
 use App\Models\SectionTitle;
 use App\Models\Slider;
+use App\Models\Subscriber;
 use App\Models\TermsCondition;
 use App\Models\Testimonial;
 use Illuminate\Contracts\View\View;
@@ -122,6 +123,25 @@ class HomeController extends Controller
             'status' => 'success',
             'message' => 'Reservation successfully made.'
         ], 200);
+    }
+
+    function subscribeNewsletter(Request $request): Response
+    {
+        $validatedData = $request->validate(
+            [
+                'email' => ['required', 'email', 'max:255', 'unique:subscribers,email'],
+            ],
+            [
+                'email.unique' => 'Email is already subscribed!'
+            ]
+        );
+
+        Subscriber::create($validatedData);
+
+        return response([
+            'status' => 'success',
+            'message' => 'Subscribed successfully!'
+        ]);
     }
 
     function sendContactMessage(Request $request): Response

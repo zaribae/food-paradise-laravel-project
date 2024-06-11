@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\DailyOfferController;
 use App\Http\Controllers\Admin\DeliveryAreaController;
 use App\Http\Controllers\Admin\LivechatController;
 use App\Http\Controllers\Admin\MenuSliderController;
+use App\Http\Controllers\Admin\NewsletterController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PaymentGatewaySettingController;
 use App\Http\Controllers\Admin\PrivacyPolicyController;
@@ -151,6 +152,10 @@ Route::prefix('/admin')->as('admin.')->group(function () {
     Route::delete('/reservation/{id}', [ReservationController::class, 'destroy'])->name('reservation.destroy');
 
     Route::resource('/reservation-time', ReservationTimeController::class);
+
+    // News Letter Route
+    Route::get('/news-letter', [NewsletterController::class, 'index'])->name('news-letter.index');
+    Route::post('/news-letter', [NewsletterController::class, 'sendNewsletter'])->name('news-letter.send');
 
     // Setting Route
     Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');

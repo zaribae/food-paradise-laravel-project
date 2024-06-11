@@ -42,6 +42,9 @@ Route::get('/terms-condition', [HomeController::class, 'termsCondition'])->name(
 // Reservation Route
 Route::post('/reservation', [HomeController::class, 'reservation'])->name('reservation.store')->middleware(['auth', 'verified']);
 
+// Subscribe newsletter Route
+Route::post('/subscribe-newsletter', [HomeController::class, 'subscribeNewsletter'])->name('subscribe-newsletter.store');
+
 // User Routes
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

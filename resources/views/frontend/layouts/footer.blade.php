@@ -44,9 +44,10 @@
                 <div class="col-lg-3 col-sm-8 col-md-6 order-lg-4">
                     <div class="fp__footer_content">
                         <h3>subscribe</h3>
-                        <form>
-                            <input type="text" placeholder="Subscribe">
-                            <button>Subscribe</button>
+                        <form class="subscribe-form" method="post">
+                            @csrf
+                            <input type="text" placeholder="Subscribe" name="email">
+                            <button type="submit" class="subscribe-btn">Subscribe</button>
                         </form>
                         <div class="fp__footer_social_link">
                             <h5>follow us:</h5>
@@ -82,3 +83,37 @@
         </div>
     </div>
 </footer>
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('.subscribe-form').on('submit', function(e) {
+                e.preventDefault();
+                let formData = $(this).serialize();
+
+                $.ajax({
+                    method: 'POST',
+                    url: "{{ route('subscribe-newsletter.store') }}",
+                    data: formData,
+                    beforeSend: function() {
+                        $('.subscribe-btn').html(
+                            "<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span>"
+                        );
+                    },
+                    success: function(response) {
+                        $('.subscribe-form').trigger('reset');
+                        toastr.success(response.message);
+                    },
+                    error: function(jqXHR, textStatus, error) {
+                        let errors = jqXHR.responseJSON.message;
+                        toastr.error(errors);
+                    },
+                    complete: function() {
+                        $('.subscribe-btn').html("Subscribe");
+                        $('.subscribe-btn').attr('disabled', false);
+                    }
+                })
+            })
+        })
+    </script>
+@endpush
