@@ -39,6 +39,9 @@ Route::get('/privacy-policy', [HomeController::class, 'privacyPolicy'])->name('p
 // Terms & Condition Route
 Route::get('/terms-condition', [HomeController::class, 'termsCondition'])->name('terms-condition.index');
 
+// Reservation Route
+Route::post('/reservation', [HomeController::class, 'reservation'])->name('reservation.store')->middleware(['auth', 'verified']);
+
 // User Routes
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

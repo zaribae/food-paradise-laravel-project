@@ -19,6 +19,7 @@ use App\Models\MenuSlider;
 use App\Models\PrivacyPolicy;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\Reservation;
 use App\Models\SectionTitle;
 use App\Models\Slider;
 use App\Models\TermsCondition;
@@ -94,6 +95,33 @@ class HomeController extends Controller
     {
         $contact = Contact::first();
         return view('frontend.pages.contact', compact('contact'));
+    }
+
+    function reservation(Request $request): Response
+    {
+        $request->validate([
+            'name' => ['required', 'max:255'],
+            'phone' => ['required', 'max:24'],
+            'date' => ['required', 'date'],
+            'time' => ['required'],
+            'persons' => ['required', 'numeric'],
+        ]);
+
+        $reservation = new Reservation();
+
+        $reservation->reservation_id = rand(0, 999999);
+        $reservation->user_id = auth()->user()->id;
+        $reservation->name = $request->name;
+        $reservation->phone = $request->phone;
+        $reservation->date = $request->date;
+        $reservation->time = $request->time;
+        $reservation->persons = $request->persons;
+        $reservation->save();
+
+        return response([
+            'status' => 'success',
+            'message' => 'Reservation successfully made.'
+        ], 200);
     }
 
     function sendContactMessage(Request $request): Response

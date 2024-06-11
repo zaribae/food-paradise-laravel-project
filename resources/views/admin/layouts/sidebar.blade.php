@@ -290,6 +290,14 @@
                 <li><a class="nav-link" href="{{ route('admin.contact.index') }}">Contacts</a></li>
             </ul>
         </li>
+        <li class="dropdown">
+            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
+                <span>Manage Reservation</span></a>
+            <ul class="dropdown-menu">
+                <li><a class="nav-link" href="{{ route('admin.reservation.index') }}">Reservation</a></li>
+                <li><a class="nav-link" href="{{ route('admin.reservation-time.index') }}">Reservation Times</a></li>
+            </ul>
+        </li>
         <li><a class="nav-link" href="{{ route('admin.setting.index') }}"><i class="far fa-square"></i>
                 <span>Settings</span></a></li>
         </ul>

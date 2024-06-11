@@ -2,8 +2,8 @@
 
 @section('content')
     <!--=============================
-                                                                                                                                                                                                                                    BREADCRUMB START
-                                                                                                                                                                                                                                ==============================-->
+                                                                                                                                                                                                                                            BREADCRUMB START
+                                                                                                                                                                                                                                        ==============================-->
     <section class="fp__breadcrumb" style="background: url({{ asset('frontend/images/counter_bg.jpg') }});">
         <div class="fp__breadcrumb_overlay">
             <div class="container">
@@ -18,13 +18,13 @@
         </div>
     </section>
     <!--=============================
-                                                                                                                                                                                                                                    BREADCRUMB END
-                                                                                                                                                                                                                                ==============================-->
+                                                                                                                                                                                                                                            BREADCRUMB END
+                                                                                                                                                                                                                                        ==============================-->
 
 
     <!--=========================
-                                                                                                                                                                                                                                    DASHBOARD START
-                                                                                                                                                                                                                                ==========================-->
+                                                                                                                                                                                                                                            DASHBOARD START
+                                                                                                                                                                                                                                        ==========================-->
     <section class="fp__dashboard mt_120 xs_mt_90 mb_100 xs_mb_70">
         <div class="container">
             <div class="fp__dashboard_area">
@@ -57,6 +57,11 @@
                                     data-bs-target="#v-pills-profile" type="button" role="tab"
                                     aria-controls="v-pills-profile" aria-selected="false"><span><i
                                             class="fas fa-bags-shopping"></i></span> Order</button>
+
+                                <button class="nav-link" id="v-pills-reservation-tab" data-bs-toggle="pill"
+                                    data-bs-target="#v-pills-reservation" type="button" role="tab"
+                                    aria-controls="v-pills-reservation" aria-selected="false"><span><i
+                                            class="fas fa-bags-shopping"></i></span> Reservation</button>
 
                                 @php
                                     $unseenMessage = \App\Models\Livechat::where([
@@ -112,8 +117,12 @@
                                 {{-- Order List Section  --}}
                                 @include('frontend.dashboard.components.order-list-section')
 
+                                {{-- Reservation Section  --}}
+                                @include('frontend.dashboard.components.reservation')
+
                                 {{-- Livechat Section  --}}
                                 @include('frontend.dashboard.components.livechat-section')
+
 
                                 {{-- Wishlist Section --}}
                                 <div class="tab-pane fade " id="v-pills-messages2" role="tabpanel"
@@ -520,8 +529,8 @@
     </div>
     <!-- CART POPUT END -->
     <!--=========================
-                                                                                                                                                                                                                                    DASHBOARD END
-                                                                                                                                                                                                                                ==========================-->
+                                                                                                                                                                                                                                            DASHBOARD END
+                                                                                                                                                                                                                                        ==========================-->
 @endsection
 
 @push('scripts')

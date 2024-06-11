@@ -14,7 +14,6 @@ class SettingController extends Controller
 {
     function index(): View
     {
-        dd(config('mail'));
         return view('admin.setting.index');
     }
 
