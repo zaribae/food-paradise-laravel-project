@@ -28,6 +28,7 @@ use App\Http\Controllers\Admin\ReservationController;
 use App\Http\Controllers\Admin\ReservationTimeController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\SocialLinkController;
 use App\Http\Controllers\Admin\TermsConditionController;
 use App\Http\Controllers\Admin\TestimonialController;
 
@@ -152,6 +153,9 @@ Route::prefix('/admin')->as('admin.')->group(function () {
     Route::delete('/reservation/{id}', [ReservationController::class, 'destroy'])->name('reservation.destroy');
 
     Route::resource('/reservation-time', ReservationTimeController::class);
+
+    // Social Link Routes
+    Route::resource('/social-link', SocialLinkController::class);
 
     // News Letter Route
     Route::get('/news-letter', [NewsletterController::class, 'index'])->name('news-letter.index');
