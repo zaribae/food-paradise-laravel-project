@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\CounterController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\DailyOfferController;
 use App\Http\Controllers\Admin\DeliveryAreaController;
+use App\Http\Controllers\Admin\FooterInfoController;
 use App\Http\Controllers\Admin\LivechatController;
 use App\Http\Controllers\Admin\MenuSliderController;
 use App\Http\Controllers\Admin\NewsletterController;
@@ -156,6 +157,10 @@ Route::prefix('/admin')->as('admin.')->group(function () {
 
     // Social Link Routes
     Route::resource('/social-link', SocialLinkController::class);
+
+    // Footer Routes
+    Route::get('/footer-info', [FooterInfoController::class, 'index'])->name('footer-info.index');
+    Route::patch('/footer-info', [FooterInfoController::class, 'update'])->name('footer-info.update');
 
     // News Letter Route
     Route::get('/news-letter', [NewsletterController::class, 'index'])->name('news-letter.index');
