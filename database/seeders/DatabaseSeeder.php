@@ -25,5 +25,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ProductCategorySeeder::class);
         \App\Models\Product::factory(3)->create();
         \App\Models\Coupon::factory(3)->create();
+        $this->call(MenuBuilderSeeder::class);
     }
 }

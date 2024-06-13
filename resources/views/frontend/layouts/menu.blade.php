@@ -7,45 +7,29 @@
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <i class="far fa-bars"></i>
         </button>
+        @php
+            $navMenu = Menu::getByName('main_menu');
+        @endphp
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav m-auto">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('about') }}">about</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="menu.html">menu</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('chefs.index') }}">chefs</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">pages <i class="far fa-angle-down"></i></a>
-                    <ul class="droap_menu">
-                        <li><a href="menu_details.html">menu details</a></li>
-                        <li><a href="{{ route('blogs') }}">blog details</a></li>
-                        <li><a href="cart_view.html">cart view</a></li>
-                        <li><a href="check_out.html">checkout</a></li>
-                        <li><a href="payment.html">payment</a></li>
-                        <li><a href="{{ route('testimonials.index') }}">testimonial</a></li>
-                        <li><a href="search_menu.html">search result</a></li>
-                        <li><a href="404.html">404/Error</a></li>
-                        <li><a href="faq.html">FAQs</a></li>
-                        <li><a href="sign_in.html">sign in</a></li>
-                        <li><a href="sign_up.html">sign up</a></li>
-                        <li><a href="forgot_password.html">forgot password</a></li>
-                        <li><a href="{{ route('privacy-policy.index') }}">privacy policy</a></li>
-                        <li><a href="{{ route('terms-condition.index') }}">terms and condition</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('blogs') }}">blog</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('contact') }}">contact</a>
-                </li>
+                @if ($navMenu)
+                    @foreach ($navMenu as $menuItem)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ $menuItem['link'] }}">{{ $menuItem['label'] }}
+                                @if ($menuItem['child'])
+                                    <i class="far fa-angle-down"></i>
+                                @endif
+                            </a>
+                            @if ($menuItem['child'])
+                                <ul class="droap_menu">
+                                    @foreach ($menuItem['child'] as $childItem)
+                                        <li><a href="{{ $childItem['link'] }}">{{ $childItem['label'] }}</a></li>
+                                    @endforeach
+                                </ul>
+                            @endif
+                        </li>
+                    @endforeach
+                @endif
             </ul>
             <ul class="menu_icon d-flex flex-wrap">
                 <li>

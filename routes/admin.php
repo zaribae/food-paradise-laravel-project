@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\DailyOfferController;
 use App\Http\Controllers\Admin\DeliveryAreaController;
 use App\Http\Controllers\Admin\FooterInfoController;
 use App\Http\Controllers\Admin\LivechatController;
+use App\Http\Controllers\Admin\MenuBuilderController;
 use App\Http\Controllers\Admin\MenuSliderController;
 use App\Http\Controllers\Admin\NewsletterController;
 use App\Http\Controllers\Admin\OrderController;
@@ -161,6 +162,10 @@ Route::prefix('/admin')->as('admin.')->group(function () {
     // Footer Routes
     Route::get('/footer-info', [FooterInfoController::class, 'index'])->name('footer-info.index');
     Route::patch('/footer-info', [FooterInfoController::class, 'update'])->name('footer-info.update');
+
+    // Menu Builder Routes
+    Route::get('/menu-builder', [MenuBuilderController::class, 'index'])->name('menu-builder.index');
+
 
     // News Letter Route
     Route::get('/news-letter', [NewsletterController::class, 'index'])->name('news-letter.index');
