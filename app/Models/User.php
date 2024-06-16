@@ -48,4 +48,9 @@ class User extends Authenticatable
         return $this->hasMany(Livechat::class, 'sender_id', 'id')
             ->orWhere('receiver_id', $this->id);
     }
+
+    function orders(): HasMany
+    {
+        return $this->hasMany(Order::class, 'user_id', 'id');
+    }
 }

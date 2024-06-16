@@ -38,6 +38,8 @@
                     ])
                         ->orderBy('id', 'DESC')
                         ->take(8)
+                        ->withAvg('productRatings', 'rating')
+                        ->withCount('productRatings')
                         ->get();
                 @endphp
                 @foreach ($products as $product)
@@ -50,12 +52,13 @@
                             </div>
                             <div class="fp__menu_item_text">
                                 <p class="rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                    <i class="far fa-star"></i>
-                                    <span>145</span>
+                                    @if (@$product->product_ratings_avg_rating)
+                                        @for ($i = 1; $i <= @$product->product_ratings_avg_rating; $i++)
+                                            <i class="fas fa-star"></i>
+                                        @endfor
+                                        <span>{{ @$product->product_ratings_count }}</span>
+                                    @endif
+
                                 </p>
                                 <a class="title"
                                     href="{{ route('product.show', $product->slug) }}">{{ $product->name }}</a>

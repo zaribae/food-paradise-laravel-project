@@ -24,6 +24,7 @@ use App\Http\Controllers\Admin\ProductCategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductGalleryController;
 use App\Http\Controllers\Admin\ProductOptionController;
+use App\Http\Controllers\Admin\ProductReviewController;
 use App\Http\Controllers\Admin\ProductSizeController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ReservationController;
@@ -77,6 +78,11 @@ Route::prefix('/admin')->as('admin.')->group(function () {
 
     // Product Route
     Route::resource('/product', ProductController::class);
+
+    // Product Review Route
+    Route::get('/product-review', [ProductReviewController::class, 'index'])->name('product-review.index');
+    Route::post('/product-review', [ProductReviewController::class, 'update'])->name('product-review.update');
+    Route::delete('/product-review/{id}', [ProductReviewController::class, 'destroy'])->name('product-review.destroy');
 
     // Product Category Route
     Route::resource('/product-category', ProductCategoryController::class);

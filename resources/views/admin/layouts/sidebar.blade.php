@@ -252,6 +252,7 @@
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="{{ route('admin.product.index') }}">Products</a></li>
                     <li><a class="nav-link" href="{{ route('admin.product-category.index') }}">Product Categories</a>
+                    <li><a class="nav-link" href="{{ route('admin.product-review.index') }}">Product Reviews</a>
                     </li>
                 </ul>
             </li>

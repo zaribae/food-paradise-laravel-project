@@ -2,8 +2,8 @@
 
 @section('content')
     <!--=============================
-                                                                                                                                                                                                                                                                                                                                        BREADCRUMB START
-                                                                                                                                                                                                                                                                                                                                    ==============================-->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            BREADCRUMB START
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ==============================-->
     <section class="fp__breadcrumb" style="background: url({{ asset('frontend/images/counter_bg.jpg') }});">
         <div class="fp__breadcrumb_overlay">
             <div class="container">
@@ -18,13 +18,13 @@
         </div>
     </section>
     <!--=============================
-                                                                                                                                                                                                                                                                                                                                        BREADCRUMB END
-                                                                                                                                                                                                                                                                                                                                    ==============================-->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            BREADCRUMB END
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ==============================-->
 
 
     <!--=============================
-                                                                                                                                                                                                                                                                                                                                        MENU DETAILS START
-                                                                                                                                                                                                                                                                                                                                    ==============================-->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            MENU DETAILS START
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ==============================-->
     <section class="fp__menu_details mt_115 xs_mt_85 mb_95 xs_mb_65">
         <div class="container">
             <div class="row">
@@ -55,12 +55,12 @@
                     <div class="fp__menu_details_text">
                         <h2>{!! $product->name !!}</h2>
                         <p class="rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <i class="far fa-star"></i>
-                            <span>(201)</span>
+                            @if (@$product->product_ratings_avg_rating)
+                                @for ($i = 1; $i <= @$product->product_ratings_avg_rating; $i++)
+                                    <i class="fas fa-star"></i>
+                                @endfor
+                                <span>({{ @$product->product_ratings_count }})</span>
+                            @endif
                         </p>
                         <h3 class="price">
                             @if ($product->offer_price > 0)
@@ -171,101 +171,70 @@
                                 <div class="fp__review_area">
                                     <div class="row">
                                         <div class="col-lg-8">
-                                            <h4>04 reviews</h4>
+                                            <h4>{{ count(@$reviews) }} reviews</h4>
                                             <div class="fp__comment pt-0 mt_20">
-                                                <div class="fp__single_comment m-0 border-0">
-                                                    <img src="images/comment_img_1.png" alt="review" class="img-fluid">
-                                                    <div class="fp__single_comm_text">
-                                                        <h3>Michel Holder <span>29 oct 2022 </span></h3>
-                                                        <span class="rating">
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fad fa-star-half-alt"></i>
-                                                            <i class="fal fa-star"></i>
-                                                            <b>(120)</b>
-                                                        </span>
-                                                        <p>Sure there isn't anything embarrassing hiidden in the
-                                                            middles of text. All erators on the Internet
-                                                            tend to repeat predefined chunks</p>
+                                                @foreach (@$reviews as $review)
+                                                    <div class="fp__single_comment m-0 border-0">
+                                                        <img src="{{ asset(@$review->user->image) }}" alt="review"
+                                                            class="img-fluid">
+                                                        <div class="fp__single_comm_text">
+                                                            <h3>{{ @$review->user->name }}
+                                                                <span>{{ date('d M Y', strtotime(@$review->created_at)) }}
+                                                                </span>
+                                                            </h3>
+                                                            <span class="rating">
+                                                                @for ($i = 1; $i < @$review->rating; $i++)
+                                                                    <i class="fas fa-star"></i>
+                                                                @endfor
+                                                            </span>
+                                                            <p>{{ @$review->review }}</p>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="fp__single_comment">
-                                                    <img src="images/chef_1.jpg" alt="review" class="img-fluid">
-                                                    <div class="fp__single_comm_text">
-                                                        <h3>salina khan <span>29 oct 2022 </span></h3>
-                                                        <span class="rating">
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fad fa-star-half-alt"></i>
-                                                            <i class="fal fa-star"></i>
-                                                            <b>(120)</b>
-                                                        </span>
-                                                        <p>Sure there isn't anything embarrassing hiidden in the
-                                                            middles of text. All erators on the Internet
-                                                            tend to repeat predefined chunks</p>
+                                                @endforeach
+                                                @if (count(@$reviews) === 0)
+                                                    <div class="alert alert-warning text-center mt-5">
+                                                        There are no reviews for this product.
                                                     </div>
-                                                </div>
-                                                <div class="fp__single_comment">
-                                                    <img src="images/comment_img_2.png" alt="review" class="img-fluid">
-                                                    <div class="fp__single_comm_text">
-                                                        <h3>Mouna Sthesia <span>29 oct 2022 </span></h3>
-                                                        <span class="rating">
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fad fa-star-half-alt"></i>
-                                                            <i class="fal fa-star"></i>
-                                                            <b>(120)</b>
-                                                        </span>
-                                                        <p>Sure there isn't anything embarrassing hiidden in the
-                                                            middles of text. All erators on the Internet
-                                                            tend to repeat predefined chunks</p>
+                                                @endif
+                                                @if ($reviews->hasPages())
+                                                    <div class="fp__pagination mt_60">
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                {{ $reviews->links() }}
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="fp__single_comment">
-                                                    <img src="images/chef_3.jpg" alt="review" class="img-fluid">
-                                                    <div class="fp__single_comm_text">
-                                                        <h3>marjan janifar <span>29 oct 2022 </span></h3>
-                                                        <span class="rating">
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fad fa-star-half-alt"></i>
-                                                            <i class="fal fa-star"></i>
-                                                            <b>(120)</b>
-                                                        </span>
-                                                        <p>Sure there isn't anything embarrassing hiidden in the
-                                                            middles of text. All erators on the Internet
-                                                            tend to repeat predefined chunks</p>
-                                                    </div>
-                                                </div>
-                                                <a href="#" class="load_more">load More</a>
+                                                @endif
                                             </div>
 
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="fp__post_review">
                                                 <h4>write a Review</h4>
-                                                <form>
-                                                    <p class="rating">
-                                                        <span>select your rating : </span>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                    </p>
+                                                <form action="{{ route('product-review.store') }}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
                                                     <div class="row">
-                                                        <div class="col-xl-12">
+                                                        {{-- <div class="col-xl-12">
                                                             <input type="text" placeholder="Name">
                                                         </div>
                                                         <div class="col-xl-12">
                                                             <input type="email" placeholder="Email">
-                                                        </div>
+                                                        </div> --}}
                                                         <div class="col-xl-12">
-                                                            <textarea rows="3" placeholder="Write your review"></textarea>
+                                                            <label for="rating">Ratings</label>
+                                                            <select name="rating" id="rating"
+                                                                class="form-control nice-select mt-3">
+                                                                <option value="5">5</option>
+                                                                <option value="4">4</option>
+                                                                <option value="3">3</option>
+                                                                <option value="2">2</option>
+                                                                <option value="1">1</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-xl-12 mt-3">
+                                                            <label for="review">Review</label>
+                                                            <textarea name="review" id="review" rows="3" placeholder="Write your review"></textarea>
                                                         </div>
                                                         <div class="col-12">
                                                             <button class="common_btn" type="submit">submit
@@ -290,18 +259,18 @@
                             <div class="col-xl-3 wow fadeInUp" data-wow-duration="1s">
                                 <div class="fp__menu_item">
                                     <div class="fp__menu_item_img">
-                                        <img src="{{ asset($product->thumbnail_image) }}" alt="{{ $product->name }}"
+                                        <img src="{{ asset(@$product->thumbnail_image) }}" alt="{{ @$product->name }}"
                                             class="img-fluid w-100">
                                         <a class="category" href="#">{{ @$product->productCategory->name }}</a>
                                     </div>
                                     <div class="fp__menu_item_text">
                                         <p class="rating">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star-half-alt"></i>
-                                            <i class="far fa-star"></i>
-                                            <span>74</span>
+                                            @if (@$product->product_ratings_avg_rating)
+                                                @for ($i = 1; $i <= @$product->product_ratings_avg_rating; $i++)
+                                                    <i class="fas fa-star"></i>
+                                                @endfor
+                                                <span>{{ @$product->product_ratings_count }}</span>
+                                            @endif
                                         </p>
                                         <a class="title"
                                             href="{{ route('product.show', $product->slug) }}">{!! $product->name !!}</a>

@@ -74,6 +74,9 @@ Route::post('/blogs/comment/{blogId}', [HomeController::class, 'blogCommentStore
 // Product Routes
 Route::get('/product/{slug}', [HomeController::class, 'showProduct'])->name('product.show');
 
+// Product Review Route
+Route::post('/product-review', [HomeController::class, 'productReviewStore'])->name('product-review.store')->middleware(['auth', 'verified']);
+
 // Product show Modal Routes
 Route::get('/product-modal/{productId}', [HomeController::class, 'loadProductModal'])->name('product.load-modal');
 
