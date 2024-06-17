@@ -9,6 +9,7 @@ use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\LivechatController;
 use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Frontend\ProfileController;
+use App\Http\Controllers\Frontend\WishlistController;
 use App\Models\Order;
 use Illuminate\Support\Facades\Route;
 
@@ -80,6 +81,9 @@ Route::post('/product-review', [HomeController::class, 'productReviewStore'])->n
 
 // Product show Modal Routes
 Route::get('/product-modal/{productId}', [HomeController::class, 'loadProductModal'])->name('product.load-modal');
+
+// Wishlist Routes
+Route::get('/wishlist/{productId}', [WishlistController::class, 'store'])->name('wishlist.store');
 
 // Add product to cart Routes
 Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('product.add-to-cart');

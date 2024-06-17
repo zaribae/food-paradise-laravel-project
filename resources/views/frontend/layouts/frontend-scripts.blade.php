@@ -44,10 +44,10 @@
     }
 
     // Load product Modal
-    function loadProductModal($productId) {
+    function loadProductModal(productId) {
         $.ajax({
             method: 'GET',
-            url: "{{ route('product.load-modal', ':productId') }}".replace(':productId', $productId),
+            url: "{{ route('product.load-modal', ':productId') }}".replace(':productId', productId),
             beforeSend: function() {
                 showLoader();
             },
@@ -57,6 +57,30 @@
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.log(errorThrown);
+            },
+            complete: function() {
+                hideLoader();
+            }
+        })
+    }
+
+    // Add product to Wishlist
+    function addToWishlist(productId) {
+        $.ajax({
+            method: 'GET',
+            url: "{{ route('wishlist.store', ':productId') }}".replace(':productId', productId),
+            beforeSend: function() {
+                showLoader();
+            },
+            success: function(response) {
+                toastr.success(response.message);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                let errorMsg = jqXHR.responseJSON.errors;
+
+                $.each(errorMsg, function(index, value) {
+                    toastr.error(value);
+                })
             },
             complete: function() {
                 hideLoader();
