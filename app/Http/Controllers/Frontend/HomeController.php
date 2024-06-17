@@ -280,6 +280,31 @@ class HomeController extends Controller
         return redirect()->back();
     }
 
+    function productAll(Request $request): View
+    {
+        $products = Product::where(['status' => 1,])->orderBy('id', 'DESC');
+
+        if ($request->has('search') && $request->filled('search')) {
+            $products->where(function ($query) use ($request) {
+                $query->where('name', 'like', '%' . $request->search . '%')
+                    ->orWhere('short_description', 'like', '%' . $request->search . '%');
+            });
+        }
+
+        if ($request->has('product_category') && $request->filled('product_category')) {
+            $products->whereHas('productCategory', function ($query) use ($request) {
+                $query->where('slug', $request->product_category);
+            });
+        }
+
+        $products = $products->withAvg('productRatings', 'rating')
+            ->withCount('productRatings')
+            ->paginate(8);
+        $categories = ProductCategory::all();
+
+        return view('frontend.pages.product', compact('products', 'categories'));
+    }
+
     function showProduct(string $slug): View
     {
         $product = Product::with(['productImages', 'productSizes', 'productOptions'])->where(['slug' => $slug, 'status' => 1])

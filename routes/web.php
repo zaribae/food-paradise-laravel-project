@@ -72,6 +72,7 @@ Route::get('/blogs/{slug}', [HomeController::class, 'blogDetails'])->name('blogs
 Route::post('/blogs/comment/{blogId}', [HomeController::class, 'blogCommentStore'])->name('blogs.comment')->middleware(['auth', 'verified']);
 
 // Product Routes
+Route::get('/product', [HomeController::class, 'productAll'])->name('product.index');
 Route::get('/product/{slug}', [HomeController::class, 'showProduct'])->name('product.show');
 
 // Product Review Route
