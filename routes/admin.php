@@ -185,9 +185,18 @@ Route::prefix('/admin')->as('admin.')->group(function () {
     Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
     Route::patch('/setting/general-setting', [SettingController::class, 'updateGeneralSetting'])->name('setting.general-setting.update');
 
+    // Logo Setting Route
+    Route::patch('/logo-setting', [SettingController::class, 'updateLogoSetting'])->name('logo-setting.update');
+
+    // Appearance Setting Route
+    Route::patch('/appearance-setting', [SettingController::class, 'updateAppearanceSetting'])->name('appearance-setting.update');
+
     // Pusher Setting Route
     Route::patch('/pusher-setting', [SettingController::class, 'updatePusherSetting'])->name('pusher-setting.update');
 
     // Mail Setting Route
     Route::patch('/mail-setting', [SettingController::class, 'updateMailSetting'])->name('mail-setting.update');
+
+    // Mail Setting Route
+    Route::patch('/seo-setting', [SettingController::class, 'updateSeoSetting'])->name('seo-setting.update');
 });

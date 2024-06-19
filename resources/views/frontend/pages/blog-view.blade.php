@@ -1,7 +1,7 @@
 @extends('frontend.layouts.master')
 
 @section('content')
-    <section class="fp__breadcrumb" style="background: url({{ asset('frontend/images/counter_bg.jpg') }});">
+    <section class="fp__breadcrumb" style="background: url({{ asset(config('settings.breadcrumb')) }});">
         <div class="fp__breadcrumb_overlay">
             <div class="container">
                 <div class="fp__breadcrumb_text">
@@ -42,7 +42,7 @@
                 @foreach ($blogs as $blog)
                     <div class="col-xl-4 col-sm-6 col-lg-4 wow fadeInUp" data-wow-duration="1s">
                         <div class="fp__single_blog">
-                            <a href="#" class="fp__single_blog_img">
+                            <a href="{{ route('blogs.view', $blog->slug) }}" class="fp__single_blog_img">
                                 <img src="{{ @$blog->image }}" alt="blog" class="img-fluid w-100">
                             </a>
                             <div class="fp__single_blog_text">
