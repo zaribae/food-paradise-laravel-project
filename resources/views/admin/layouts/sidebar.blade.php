@@ -76,10 +76,12 @@
             $notifications = \App\Models\OrderPlacedNotification::where('seen', 0)->latest()->take(6)->get();
             $unseenMessages = \App\Models\Livechat::where(['receiver_id' => auth()->user()->id, 'seen' => 0])->count();
         @endphp
-        <li class="dropdown dropdown-list-toggle"><a href="{{ route('admin.livechat.index') }}" data-toggle="dropdown"
-                class="nav-link nav-link-lg message-notification {{ $unseenMessages > 0 ? 'beep' : '' }}"><i
-                    class="far fa-envelope"></i></a>
-            {{-- <div class="dropdown-menu dropdown-list dropdown-menu-right">
+        @if (auth()->user()->id === 1)
+            <li class="dropdown dropdown-list-toggle"><a href="{{ route('admin.livechat.index') }}"
+                    data-toggle="dropdown"
+                    class="nav-link nav-link-lg message-notification {{ $unseenMessages > 0 ? 'beep' : '' }}"><i
+                        class="far fa-envelope"></i></a>
+                {{-- <div class="dropdown-menu dropdown-list dropdown-menu-right">
                 <div class="dropdown-header">Messages
                     <div class="float-right">
                         <a href="#">Mark All As Read</a>
@@ -143,7 +145,8 @@
                     <a href="#">View All <i class="fas fa-chevron-right"></i></a>
                 </div>
             </div> --}}
-        </li>
+            </li>
+        @endif
         <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
                 class="nav-link notification-toggle nav-link-lg notification-beep {{ count($notifications) > 0 ? 'beep' : '' }}"><i
                     class="far fa-bell"></i></a>
@@ -267,8 +270,10 @@
                     </li>
             </li>
         </ul>
-        <li><a class="nav-link" href="{{ route('admin.livechat.index') }}"><i class="far fa-square"></i>
-                <span>Livechat</span></a></li>
+        @if (auth()->user()->id === 1)
+            <li><a class="nav-link" href="{{ route('admin.livechat.index') }}"><i class="far fa-square"></i>
+                    <span>Livechat</span></a></li>
+        @endif
         <li class="dropdown">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
                 <span>Blog</span></a>
@@ -312,6 +317,8 @@
                 <li><a class="nav-link" href="{{ route('admin.footer-info.index') }}">Footer Info</a></li>
             </ul>
         </li>
+        <li><a class="nav-link" href="{{ route('admin.admin-management.index') }}"><i class="far fa-square"></i>
+                <span>Admin Management</span></a></li>
         <li><a class="nav-link" href="{{ route('admin.setting.index') }}"><i class="far fa-square"></i>
                 <span>Settings</span></a></li>
 

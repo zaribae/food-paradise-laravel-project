@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AdminManagementController;
 use App\Http\Controllers\Admin\AppDownloadController;
 use App\Http\Controllers\Admin\BenefitController;
 use App\Http\Controllers\Admin\BlogCategoryController;
@@ -176,6 +177,9 @@ Route::prefix('/admin')->as('admin.')->group(function () {
     // News Letter Route
     Route::get('/news-letter', [NewsletterController::class, 'index'])->name('news-letter.index');
     Route::post('/news-letter', [NewsletterController::class, 'sendNewsletter'])->name('news-letter.send');
+
+    // Admin Management Route
+    Route::resource('/admin-management', AdminManagementController::class);
 
     // Setting Route
     Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
