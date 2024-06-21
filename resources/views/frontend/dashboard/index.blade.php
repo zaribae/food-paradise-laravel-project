@@ -2,8 +2,8 @@
 
 @section('content')
     <!--=============================
-                                                                                                                                                                                                                                                        BREADCRUMB START
-                                                                                                                                                                                                                                                    ==============================-->
+                                                                                                                                                                                                                                                                BREADCRUMB START
+                                                                                                                                                                                                                                                            ==============================-->
     <section class="fp__breadcrumb" style="background: url({{ asset('frontend/images/counter_bg.jpg') }});">
         <div class="fp__breadcrumb_overlay">
             <div class="container">
@@ -18,13 +18,13 @@
         </div>
     </section>
     <!--=============================
-                                                                                                                                                                                                                                                        BREADCRUMB END
-                                                                                                                                                                                                                                                    ==============================-->
+                                                                                                                                                                                                                                                                BREADCRUMB END
+                                                                                                                                                                                                                                                            ==============================-->
 
 
     <!--=========================
-                                                                                                                                                                                                                                                        DASHBOARD START
-                                                                                                                                                                                                                                                    ==========================-->
+                                                                                                                                                                                                                                                                DASHBOARD START
+                                                                                                                                                                                                                                                            ==========================-->
     <section class="fp__dashboard mt_120 xs_mt_90 mb_100 xs_mb_70">
         <div class="container">
             <div class="fp__dashboard_area">
@@ -70,9 +70,9 @@
                                         'seen' => 0,
                                     ])->count();
                                 @endphp
-                                <button class="nav-link fp-livechat" id="v-pills-settings-tab" data-bs-toggle="pill"
-                                    data-bs-target="#v-pills-settings" type="button" role="tab"
-                                    aria-controls="v-pills-settings" aria-selected="false"><span><i
+                                <button class="nav-link fp-livechat" id="v-pills-livechat-tab" data-bs-toggle="pill"
+                                    data-bs-target="#v-pills-livechat" type="button" role="tab"
+                                    aria-controls="v-pills-livechat" aria-selected="false"><span><i
                                             class="far fa-comment-dots"></i></span> Livechat
                                     <b class="unseen-message-count">{{ $unseenMessage > 0 ? 1 : 0 }}</b></button>
 
@@ -93,7 +93,7 @@
 
                                 <form action="{{ route('logout') }}" method="POST">
                                     @csrf
-                                    <button class="nav-link"
+                                    <button style="width:100%" class="nav-link"
                                         onclick="event.preventDefault();
                                     this.closest('form').submit();"
                                         type="button"><span> <i class="fas fa-sign-out-alt"></i>
@@ -226,8 +226,8 @@
     </div>
     <!-- CART POPUT END -->
     <!--=========================
-                                                                                                                                                                                                                                                        DASHBOARD END
-                                                                                                                                                                                                                                                    ==========================-->
+                                                                                                                                                                                                                                                                DASHBOARD END
+                                                                                                                                                                                                                                                            ==========================-->
 @endsection
 
 @push('scripts')

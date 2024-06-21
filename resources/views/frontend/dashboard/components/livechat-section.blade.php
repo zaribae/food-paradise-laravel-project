@@ -1,4 +1,4 @@
-<div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+<div class="tab-pane fade" id="v-pills-livechat" role="tabpanel" aria-labelledby="v-pills-livechat-tab">
     <div class="fp_dashboard_body fp__change_password">
         <div class="fp__message">
             <h3>Message</h3>
