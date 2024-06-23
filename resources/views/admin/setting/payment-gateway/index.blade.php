@@ -20,11 +20,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="profile-tab4" data-toggle="tab" href="#profile4" role="tab"
-                                    aria-controls="profile" aria-selected="false">Profile</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link " id="contact-tab4" data-toggle="tab" href="#contact4" role="tab"
-                                    aria-controls="contact" aria-selected="false">Contact</a>
+                                    aria-controls="profile" aria-selected="false">Coming Soon..</a>
                             </li>
                         </ul>
                     </div>
@@ -38,13 +34,6 @@
                                 quis iaculis tellus. Etiam ac vehicula eros, pharetra consectetur dui. Aliquam convallis
                                 neque eget tellus efficitur, eget maximus massa imperdiet. Morbi a mattis velit. Donec
                                 hendrerit venenatis justo, eget scelerisque tellus pharetra a.
-                            </div>
-                            <div class="tab-pane fade" id="contact4" role="tabpanel" aria-labelledby="contact-tab4">
-                                Vestibulum imperdiet odio sed neque ultricies, ut dapibus mi maximus. Proin ligula
-                                massa, gravida in lacinia efficitur, hendrerit eget mauris. Pellentesque fermentum, sem
-                                interdum molestie finibus, nulla diam varius leo, nec varius lectus elit id dolor. Nam
-                                malesuada orci non ornare vulputate. Ut ut sollicitudin magna. Vestibulum eget ligula ut
-                                ipsum venenatis ultrices. Proin bibendum bibendum augue ut luctus.
                             </div>
                         </div>
                     </div>

@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\ChefController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\CounterController;
 use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\CreateDatabaseController;
 use App\Http\Controllers\Admin\DailyOfferController;
 use App\Http\Controllers\Admin\DeliveryAreaController;
 use App\Http\Controllers\Admin\FooterInfoController;
@@ -30,6 +31,7 @@ use App\Http\Controllers\Admin\ProductSizeController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\ReservationController;
 use App\Http\Controllers\Admin\ReservationTimeController;
+use App\Http\Controllers\Admin\ResetDatabaseController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SocialLinkController;
@@ -184,19 +186,18 @@ Route::prefix('/admin')->as('admin.')->group(function () {
     // Setting Route
     Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
     Route::patch('/setting/general-setting', [SettingController::class, 'updateGeneralSetting'])->name('setting.general-setting.update');
-
     // Logo Setting Route
     Route::patch('/logo-setting', [SettingController::class, 'updateLogoSetting'])->name('logo-setting.update');
-
     // Appearance Setting Route
     Route::patch('/appearance-setting', [SettingController::class, 'updateAppearanceSetting'])->name('appearance-setting.update');
-
     // Pusher Setting Route
     Route::patch('/pusher-setting', [SettingController::class, 'updatePusherSetting'])->name('pusher-setting.update');
-
     // Mail Setting Route
     Route::patch('/mail-setting', [SettingController::class, 'updateMailSetting'])->name('mail-setting.update');
-
     // Mail Setting Route
     Route::patch('/seo-setting', [SettingController::class, 'updateSeoSetting'])->name('seo-setting.update');
+
+    // Database Route
+    Route::get('/reset-database', [ResetDatabaseController::class, 'index'])->name('reset-database.index');
+    Route::post('/reset-database', [ResetDatabaseController::class, 'destroy'])->name('reset-database.destroy');
 });

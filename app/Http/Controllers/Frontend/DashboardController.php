@@ -23,7 +23,7 @@ class DashboardController extends Controller
         $orders = Order::where('user_id', auth()->user()->id)->get();
         $reservations = Reservation::where('user_id', auth()->user()->id)->get();
         $reviews = ProductRating::where('user_id', auth()->user()->id)->get();
-        $wishlists = Wishlist::with('product')->where('user_id', auth()->user()->id)->get();
+        $wishlists = Wishlist::with('product')->where('user_id', auth()->user()->id)->latest()->paginate(6);
 
         $totalOrders = Order::where('user_id', auth()->user()->id)->count();
         $totalCompletedOrders = Order::where(['user_id' => auth()->user()->id, 'order_status' => 'DELIVERED'])->count();

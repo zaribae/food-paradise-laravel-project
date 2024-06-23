@@ -19,7 +19,7 @@
                                 <div id="image-preview" class="image-preview">
                                     <label for="image-lable">Choose File</label>
                                     <input type="file" name="image" id="image-upload">
-                                    <input type="hidden" name="old_image" value="{{ $appSection->image }}">
+                                    <input type="hidden" name="old_image" value="{{ @$appSection->image }}">
                                 </div>
                             </div>
                         </div>
@@ -29,7 +29,7 @@
                                 <div id="background-image-preview" class="image-preview background-image-preview">
                                     <label for="background-image-label">Choose File</label>
                                     <input type="file" name="background" id="background-image-upload">
-                                    <input type="hidden" name="old_background" value="{{ $appSection->background }}">
+                                    <input type="hidden" name="old_background" value="{{ @$appSection->background }}">
                                 </div>
                             </div>
                         </div>

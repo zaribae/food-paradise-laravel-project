@@ -2,20 +2,20 @@
     DOWNLOAD APP START
 ==============================-->
 <section class="fp__download mt_100 xs_mt_70">
-    <div class="fp__download_bg" style="background: url({{ asset($appDownloadSection->background) }});">
+    <div class="fp__download_bg" style="background: url({{ @$appDownloadSection->background }});">
         <div class="fp__download_overlay">
             <div class="container">
                 <div class="row justify-content-between">
                     <div class="col-xl-5 col-md-6 wow fadeInUp" data-wow-duration="1s">
                         <div class="fp__download_img">
-                            <img src="{{ asset($appDownloadSection->image) }}" alt="download" class="img-fluid w-100">
+                            <img src="{{ @$appDownloadSection->image }}" alt="download" class="img-fluid w-100">
                         </div>
                     </div>
                     <div class="col-xl-6 col-md-6 wow fadeInUp" data-wow-duration="1s">
                         <div class="fp__download_text">
                             <div class="fp__section_heading mb_25">
-                                <h2>{!! $appDownloadSection->title !!}</h2>
-                                <p>{!! $appDownloadSection->short_description !!}</p>
+                                <h2>{!! @$appDownloadSection->title !!}</h2>
+                                <p>{!! @$appDownloadSection->short_description !!}</p>
                             </div>
                             <ul class="d-flex flex-wrap">
                                 @if (@$appDownloadSection->playstore_link)

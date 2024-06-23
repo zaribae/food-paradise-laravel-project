@@ -173,4 +173,17 @@ if (!function_exists('getThumbnail')) {
 
         return "https://img.youtube.com/vi/$videoId/$finalSize.jpeg";
     }
+
+    /** set admin dashboard sidebar */
+    if (!function_exists('setSidebarActive')) {
+        function setSidebarActive(array $routes)
+        {
+            foreach ($routes as $route) {
+                if (request()->routeIs($route)) {
+                    return 'active';
+                }
+            }
+            return '';
+        }
+    }
 }
