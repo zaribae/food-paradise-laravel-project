@@ -30,7 +30,7 @@
 
     <style>
         :root {
-            /* --colorPrimary: {{ config('settings.site_color') }} !important; */
+            --colorPrimary: {{ config('settings.site_color') }} !important;
         }
     </style>
 
