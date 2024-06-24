@@ -39,6 +39,9 @@ class ProductDataTable extends DataTable
             ->addColumn('price', function ($query) {
                 return currencyPosition($query->price);
             })
+            ->addColumn('category', function ($query) {
+                return $query->productCategory->name;
+            })
             ->addColumn('offer_price', function ($query) {
                 return currencyPosition($query->offer_price);
             })
@@ -101,8 +104,10 @@ class ProductDataTable extends DataTable
             Column::make('id'),
             Column::make('image'),
             Column::make('name'),
+            Column::make('category'),
             Column::make('price'),
             Column::make('offer_price'),
+            Column::make('quantity'),
             Column::make('status'),
             Column::make('show_at_home'),
             Column::computed('action')

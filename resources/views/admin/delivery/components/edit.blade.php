@@ -15,8 +15,8 @@
                     @csrf
                     @method('PATCH')
                     <div class="form-group">
-                        <label for="address">Delivery Address</label>
-                        <textarea name="address" id="address" type="text" class="form-control">{{ $deliveryAddress->address }}</textarea>
+                        <label for="address">Area Name</label>
+                        <textarea name="area_name" id="address" type="text" class="form-control">{{ $deliveryAddress->area_name }}</textarea>
                     </div>
                     <div class="row">
                         <div class="col-md-6">

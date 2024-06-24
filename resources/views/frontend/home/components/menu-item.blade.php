@@ -20,9 +20,9 @@
         <div class="row wow fadeInUp" data-wow-duration="1s">
             <div class="col-12">
                 <div class="menu_filter d-flex flex-wrap justify-content-center">
-                    <button class=" active" data-filter="*">all menu</button>
+                    <button class="active button-click" data-filter="*">all menu</button>
                     @foreach ($productCategories as $category)
-                        <button data-filter=".{{ $category->slug }}">{{ $category->name }}</button>
+                        <button class="button-click" data-filter=".{{ $category->slug }}">{{ $category->name }}</button>
                     @endforeach
                 </div>
             </div>
@@ -43,12 +43,13 @@
                         ->get();
                 @endphp
                 @foreach ($products as $product)
-                    <div class="col-xl-3 col-sm-6 col-lg-4 {{ $category->slug }} wow fadeInUp" data-wow-duration="1s">
+                    <div class="col-xl-3 col-sm-6 col-lg-4 {{ $category->slug }} wow fadeInUp">
                         <div class="fp__menu_item">
                             <div class="fp__menu_item_img">
                                 <img src="{{ asset($product->thumbnail_image) }}" alt="{{ $product->name }}"
                                     class="img-fluid w-100">
-                                <a class="category" href="">{{ @$product->productCategory->name }}</a>
+                                <a class="category"
+                                    href="{{ route('product.show', $product->slug) }}">{{ @$product->productCategory->name }}</a>
                             </div>
                             <div class="fp__menu_item_text">
                                 <p class="rating">
