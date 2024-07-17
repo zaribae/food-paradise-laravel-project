@@ -362,10 +362,11 @@
         <li class="{{ setSidebarActive(['admin.setting.index']) }}"><a class="nav-link"
                 href="{{ route('admin.setting.index') }}"><i class="fas fa-wrench"></i>
                 <span>Settings</span></a></li>
-        <li class="{{ setSidebarActive(['admin.reset-database.index*']) }}><a class="nav-link"
-            href="{{ route('admin.reset-database.index') }}"><i class="fas fa-recycle"></i>
-            <span>Reset Database</span></a>
+        <li class="{{ setSidebarActive(['admin.reset-database.index*']) }}"><a class="nav-link"
+                href="{{ route('admin.reset-database.index') }}"><i class="fas fa-recycle"></i>
+                <span>Reset Database</span></a>
         </li>
+
 
     </aside>
 </div>
