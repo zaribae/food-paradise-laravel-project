@@ -10,7 +10,7 @@ Admin Acc :
 
 User Acc :
 
--   email: user@example.com
+-   email: user@test.com
 -   password: password
 
 # How to Run the Application guide
