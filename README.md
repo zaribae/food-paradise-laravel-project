@@ -3,6 +3,16 @@
 You need to setup, Pusher, PayPal, and SMTP Service KEYS in the Admin Dashboard page to use some of the features.
 You can import "foodparadise_db.sql" file if you want a example of default Website layout.
 
+Admin Acc :
+
+-   email: admin@test.com
+-   password: Password123
+
+User Acc :
+
+-   email: user@example.com
+-   password: password
+
 # How to Run the Application guide
 
 Clone the repository
